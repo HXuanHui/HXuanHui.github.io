@@ -1,31 +1,9 @@
 ---
-
 theme: gaia
 class:
 paginate: true
 header: 參數設定
-style: |-
-  section {
-    font-size: 26px;
-    padding: 90px;
-  }
-  h1 {
-    display: flex; 
-    justify-content: center;
-    align-items: center;
-    color: #008ED1; /* Oracle red */
-    font-size:80px;
-  }
-  h2 {
-    color: #008ED1; /* Oracle red */
-  }
-  ul, ol {
-    list-style-position: inside;
-  }
-  img{display: block; margin:0 auto;object-fit: contain;
-  }
-  table{font-size:24px}
-
+style:
 ---
 
 

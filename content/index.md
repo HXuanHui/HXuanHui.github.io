@@ -1,5 +1,5 @@
 ---
-title: 🪴 我的數位花園
+title: H.XuanHui's Notes
 ---
 
 > [!abstract] 關於這個空間
@@ -10,11 +10,12 @@ title: 🪴 我的數位花園
 ## 🧭 快速導覽
 
 📂**Database:**
- - [PostgreSQL](SUMMARY.md)
+ - [PostgreSQL](．紀錄｜PostgreSQL/使用說明/SUMMARY.md)
+ - [ORACLE](．紀錄｜Oracle/使用說明/SUMMARY.md)
 
 💻**Development:**
  - [AutoUpdater](AutoUpdater使用方法.md)
- - 
+
 
 ---
 

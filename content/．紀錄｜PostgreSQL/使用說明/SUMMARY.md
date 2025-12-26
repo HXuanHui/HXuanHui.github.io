@@ -4,7 +4,7 @@ title: 🐘PostgreSQL目錄
 
 # Table of contents
 
-
+## PostgreSQL
 * [1. PostgreSQL介紹](PostgreSQL介紹.md)
 * [2. PostgreSQL安裝](PostgreSQL安裝.md)
 * [3. PostgreSQL管理工具](PostgreSQL管理工具.md)
@@ -15,12 +15,15 @@ title: 🐘PostgreSQL目錄
 * [5.2 管理Tablespace](管理Tablespace.md)
 * [6. Postgres使用者管理](Postgres使用者管理.md)
 * [7. Postgres高可用性配置](Postgres高可用性配置.md)
-* [7.1. pgBackRest基礎建置](pgBackRest基礎建置.md)
-* [7.2. pgBackRest基礎還原操作](pgBackRest基礎還原操作.md)
-* [7.3 pgBackRest參數設定](pgBackRest參數設定.md)
 * [8. Postgres監控資料庫](Postgres監控資料庫.md)
 * [8.1 pgBadger下載與設定](pgBadger下載與設定.md)
 * [8.2 pgCluu下載與設定](pgCluu下載與設定.md)
 * [8.3 Prometheus+Grafana下載與設定](Prometheus+Grafana下載與設定.md)
+## pgBackRest
+
+* [1. pgBackRest基礎建置](pgBackRest基礎建置.md)
+* [2. pgBackRest基礎還原操作](pgBackRest基礎還原操作.md)
+* [3. pgBackRest參數設定](pgBackRest參數設定.md)
+
 
 #index

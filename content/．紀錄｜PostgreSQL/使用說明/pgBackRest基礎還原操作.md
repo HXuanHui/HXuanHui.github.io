@@ -5,20 +5,6 @@ class:
 paginate: true
 header: 備份還原操作
 ---
-<style scoped>h1 { 
-display: flex; 
-justify-content: center; /* 水平居中 */ 
-align-items: center; /* 垂直居中 */ 
-font-size:60px
-}
-p { 
-display: flex; 
-justify-content: center; /* 水平居中 */ 
-align-items: center; /* 垂直居中 */ 
-font-size: 16px;
-}%%  %%
-</style>
-
 
 ## 執行備份與檢視備份資訊
 在成功設定並驗證系統後，將執行不同類型的備份，並學習如何使用 `info` 指令來檢視與理解備份狀態。
