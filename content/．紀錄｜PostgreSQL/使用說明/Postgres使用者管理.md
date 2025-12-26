@@ -5,19 +5,7 @@ class: []
 paginate: true
 header: Postgres使用者管理
 ---
-<style scoped>h1 { 
-display: flex; 
-justify-content: center; /* 水平居中 */ 
-align-items: center; /* 垂直居中 */ 
-font-size:60px
-}
-p { 
-display: flex; 
-justify-content: center; /* 水平居中 */ 
-align-items: center; /* 垂直居中 */ 
-font-size: 16px;
-}
-</style>
+
 
 
 # Postgres使用者管理

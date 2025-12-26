@@ -5,19 +5,7 @@ class:
 paginate: true
 header: Postgres高可用性配置
 ---
-<style scoped>h1 { 
-display: flex; 
-justify-content: center; /* 水平居中 */ 
-align-items: center; /* 垂直居中 */ 
-font-size:60px
-}
-p { 
-display: flex; 
-justify-content: center; /* 水平居中 */ 
-align-items: center; /* 垂直居中 */ 
-font-size: 16px;
-}%%  %%
-</style>
+
 
 # Postgres高可用性配置
 黃暄惠 2024/11
@@ -44,24 +32,12 @@ font-size: 16px;
  - pgBackRest：資料備份還原 
 
 ---
-<style scoped>h2 { 
-display: flex; 
-justify-content: center; /* 水平居中 */ 
-align-items: center; /* 垂直居中 */ 
-font-size:60px
-}
-</style>
+
 ## 建立HA架構
 
 - **伺服器需求**：準備至少兩台伺服器作為 PostgreSQL 的主從節點。  
 
 ---
-<style >h3 { 
-display: flex; 
-justify-content: center; /* 水平居中 */ 
-align-items: center; /* 垂直居中 */ 
-}
-</style>
 
 ### 設定 Streaming Replication
 

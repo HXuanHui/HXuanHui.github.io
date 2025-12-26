@@ -5,19 +5,7 @@ class: []
 paginate: true
 header: Postgres Instance管理
 ---
-<style scoped>h1 { 
-display: flex; 
-justify-content: center; /* 水平居中 */ 
-align-items: center; /* 垂直居中 */ 
-font-size:60px
-}
-p { 
-display: flex; 
-justify-content: center; /* 水平居中 */ 
-align-items: center; /* 垂直居中 */ 
-font-size: 16px;
-}
-</style>
+
 
 
 
@@ -166,18 +154,7 @@ pg_ctl start
 3. [psql instance關閉怎麼做？systemctl 跟 pg_ctl的差別是什麼？](psql%20instance關閉怎麼做？systemctl%20跟%20pg_ctl的差別是什麼？.md)
 
 ---
-<style scoped>h2 { 
-display: flex; 
-justify-content: center; /* 水平居中 */ 
-align-items: center; /* 垂直居中 */ 
-}
-p{
-display: flex; 
-justify-content: center; /* 水平居中 */ 
-align-items: center; /* 垂直居中 */ 
-font-size:24px
-}
-</style>
+
 ## PostgreSQL Instance架構概述
 
 後面是架構科普，操作看前面就好🙂

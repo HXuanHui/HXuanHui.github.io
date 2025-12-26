@@ -5,31 +5,13 @@ class:
 paginate: true
 header: Prometheus+Grafana下載與設定
 ---
-<style scoped>h1 { 
-display: flex; 
-justify-content: center; /* 水平居中 */ 
-align-items: center; /* 垂直居中 */ 
-font-size:60px
-}
-p { 
-display: flex; 
-justify-content: center; /* 水平居中 */ 
-align-items: center; /* 垂直居中 */ 
-font-size: 16px;
-}
-</style>
 
 
 # Prometheus+Grafana
 黃暄惠 2024/11
 
 ---
-<style>h2 { 
-display: flex; 
-justify-content: center; /* 水平居中 */ 
-align-items: center; /* 垂直居中 */ 
-}
-</style>
+
 ## 安裝 postgres_exporter
 
 1. **下載 postgres_exporter**：

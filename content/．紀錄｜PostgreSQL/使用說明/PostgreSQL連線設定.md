@@ -5,19 +5,7 @@ class:
 paginate: true
 header: PostgreSQL連線設定
 ---
-<style scoped>h1 { 
-display: flex; 
-justify-content: center; /* 水平居中 */ 
-align-items: center; /* 垂直居中 */ 
-font-size:60px
-}
-p { 
-display: flex; 
-justify-content: center; /* 水平居中 */ 
-align-items: center; /* 垂直居中 */ 
-font-size: 16px;
-}
-</style>
+
 
 # PostgreSQL連線設定
 黃暄惠 2024/11
@@ -44,8 +32,7 @@ font-size: 16px;
 ![](．紀錄｜PostgreSQL/picture/conf.png)
 
 ---
-<style scoped> 
-<style scoped> table { width: 100%; /* 设置表格宽度 */ border-collapse: collapse; /* 合并边框 */ } th, td { text-align: left; /* 左对齐 */  border: none; font-size:22px } th:nth-child(1), td:nth-child(1) { width: 55%; /* 左边列宽度为60% */ } th:nth-child(2), td:nth-child(2) { width: 45%; /* 中间列宽度为20% */ } </style>
+
 ## Postgres連線設定-pg_hba.conf
 
 檔案裡面已經有數條內建的規則，每一條規則都是由五個欄位組成，以下簡單說明各個欄位的用途：

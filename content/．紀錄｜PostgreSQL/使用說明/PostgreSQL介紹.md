@@ -1,24 +1,26 @@
 ---
-theme:
-  - default
+theme:gaia
 paginate: true
 class: []
 header: PostgreSQL介紹
 footer:
+style: |-
+  section {
+    padding: 90px;
+  }
+  h1 {
+    align-items: center;
+    color: #008ED1; /* Oracle red */
+  }
+  h2 {
+    color: #008ED1; /* Oracle red */
+  }
+  ul, ol {
+    list-style-position: inside;
+  }
+  img{display: block; margin:0 auto;object-fit: contain;
+  }
 ---
-<style scoped> h1 { 
-display: flex; 
-justify-content: center; /* 水平居中 */ 
-align-items: center; /* 垂直居中 */ 
-font-size: 60px;
-}</style>
-<style scoped>p { 
-display: flex; 
-justify-content: center; /* 水平居中 */ 
-align-items: center; /* 垂直居中 */ 
-font-size: 16px;
-}
-</style>
 # PostgreSQL介紹
 黃暄惠 2024/11
 

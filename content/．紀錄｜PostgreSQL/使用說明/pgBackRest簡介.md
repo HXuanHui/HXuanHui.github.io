@@ -5,15 +5,11 @@ paginate: true
 header: 備份還原操作
 style: |-
   section {
-    font-size: 20px;
     padding: 90px;
   }
   h1 {
-    display: flex; 
-    justify-content: center;
     align-items: center;
     color: #008ED1; /* Oracle red */
-    font-size:80px;
   }
   h2 {
     color: #008ED1; /* Oracle red */
@@ -23,7 +19,6 @@ style: |-
   }
   img{display: block; margin:0 auto;object-fit: contain;
   }
-  table{font-size:18px}
 ---
 
 ## 簡介與核心概念

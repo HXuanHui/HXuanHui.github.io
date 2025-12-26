@@ -1,23 +1,26 @@
 ---
 theme:
-  - default
+  - gaia
 class: []
 paginate: true
+style: |-
+  section {
+    padding: 90px;
+  }
+  h1 {
+    align-items: center;
+    color: #008ED1; /* Oracle red */
+  }
+  h2 {
+    color: #008ED1; /* Oracle red */
+  }
+  ul, ol {
+    list-style-position: inside;
+  }
+  img{display: block; margin:0 auto;object-fit: contain;
+  }
 ---
 
-<style scoped>h1 { 
-display: flex; 
-justify-content: center; /* 水平居中 */ 
-align-items: center; /* 垂直居中 */ 
-font-size:60px
-}
-p { 
-display: flex; 
-justify-content: center; /* 水平居中 */ 
-align-items: center; /* 垂直居中 */ 
-font-size: 16px;
-}
-</style>
 
 # PEM安裝
 黃暄惠 2024/11
@@ -32,18 +35,7 @@ font-size: 16px;
 
 
 ---
-<style>h2 { 
-display: flex; 
-justify-content: center; /* 水平居中 */ 
-align-items: center; /* 垂直居中 */ 
-}
-</style>
-<style scoped>p { 
-display: flex; 
-justify-content: center; /* 水平居中 */ 
-align-items: center; /* 垂直居中 */ 
-}
-</style>
+
 ## 下載Agnet
 
 負責收集和傳送監控數據，安裝於多個需要被監管的伺服器上。
@@ -80,13 +72,7 @@ align-items: center; /* 垂直居中 */
 5. 完成
 	![](．紀錄｜PostgreSQL/picture/{E61610F2-3B0A-402B-B600-229086819E6F}.png)
 ---
-<style scoped>
-p { 
-display: flex; 
-justify-content: center; /* 水平居中 */ 
-align-items: center; /* 垂直居中 */ 
-}
-</style>
+
 ## 下載Server
 
 包含 PostgreSQL 實例和 Apache 網頁伺服器，提供網頁介面，安裝於管理人員使用的伺服器/電腦上。

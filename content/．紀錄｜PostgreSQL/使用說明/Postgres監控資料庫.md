@@ -5,29 +5,12 @@ class:
 paginate: true
 header: Postgres監控資料庫
 ---
-<style scoped>h1 { 
-display: flex; 
-justify-content: center; /* 水平居中 */ 
-align-items: center; /* 垂直居中 */ 
-font-size:60px
-}
-p { 
-display: flex; 
-justify-content: center; /* 水平居中 */ 
-align-items: center; /* 垂直居中 */ 
-font-size: 16px;
-}
-</style>
+
 # Postgres監控資料庫
 黃暄惠 2024/11
 
 ---
-<style> h2 { 
-display: flex; 
-justify-content: center; /* 水平居中 */ 
-align-items: center; /* 垂直居中 */ 
-}
-</style>
+
 ## Postgres監控資料庫工具
 
 1. Postgres插件

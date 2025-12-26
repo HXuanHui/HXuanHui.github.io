@@ -5,19 +5,7 @@ class:
 paginate: true
 header: PostgreSQL管理工具
 ---
-<style scoped>h1 { 
-display: flex; 
-justify-content: center; /* 水平居中 */ 
-align-items: center; /* 垂直居中 */ 
-font-size:60px
-}
-p { 
-display: flex; 
-justify-content: center; /* 水平居中 */ 
-align-items: center; /* 垂直居中 */ 
-font-size: 16px;
-}
-</style>
+
 
 # PostgreSQL管理工具
 黃暄惠 2024/11
@@ -32,13 +20,7 @@ font-size: 16px;
 **🚨PostgreSQL Instance的啟動與停止只能使用pg_ctl，無法藉由其他工具。**
 
 ---
-<style>h2 { 
-display: flex; 
-justify-content: center; /* 水平居中 */ 
-align-items: center; /* 垂直居中 */ 
-font-size:40px
-}
-</style>
+
 ## pg_
 **舉例：**
 1. pg_ctl：用於啟動、停止、重啟 PostgreSQL 伺服器。
@@ -100,13 +82,7 @@ psql -h localhost -U username -d mydb
 
 
 ---
-<style scoped>h2 { 
-display: flex; 
-justify-content: center; /* 水平居中 */ 
-align-items: center; /* 垂直居中 */ 
-font-size:40px
-}
-</style>
+
 ## pgAdmin
 
 常用功能
@@ -134,13 +110,7 @@ pgAdmin 的最新版本為 pgAdmin 4
 
 
 ---
-<style scoped>h2 { 
-display: flex; 
-justify-content: center; /* 水平居中 */ 
-align-items: center; /* 垂直居中 */ 
-font-size:40px
-}
-</style>
+
 ## Postgres Enterprise Manager
 - **功能**:
     - **監控**: 能夠監控多個 PostgreSQL 實例及其性能。

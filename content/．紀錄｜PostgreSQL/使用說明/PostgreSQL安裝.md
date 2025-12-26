@@ -5,20 +5,7 @@ class:
 paginate: true
 header: PostgreSQL安裝
 ---
-<style scoped>h1 { 
-display: flex; 
-justify-content: center; /* 水平居中 */ 
-align-items: center; /* 垂直居中 */ 
-font-size:60px
-}
-</style>
-<style scoped>p { 
-display: flex; 
-justify-content: center; /* 水平居中 */ 
-align-items: center; /* 垂直居中 */ 
-font-size: 16px;
-}
-</style>
+
 # PostgreSQL安裝
 黃暄惠 2024/11
 
@@ -51,10 +38,7 @@ font-size: 16px;
 
 ---
 ## 在Windows使用EDB安裝(cont. 2)
-<style scoped>ul { 
-font-size:20px
-}
-</style>
+
 4. 選擇添加的工具
 ![width:500px height:400px](．紀錄｜PostgreSQL/picture/chooseTool.png)
 - PostgreSQL Server 是資料庫程式
