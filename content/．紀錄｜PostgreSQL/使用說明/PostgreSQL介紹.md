@@ -1,5 +1,5 @@
 ---
-theme:gaia
+theme: gaia
 paginate: true
 class: []
 header: PostgreSQL介紹
@@ -21,6 +21,7 @@ style: |-
   img{display: block; margin:0 auto;object-fit: contain;
   }
 ---
+
 # PostgreSQL介紹
 黃暄惠 2024/11
 
@@ -34,14 +35,10 @@ style: |-
 - **事務完整性**：支援 ACID 特性（原子性、一致性、隔離性、持久性），以及預寫日誌（WAL）技術，確保資料的安全與一致性。
 - **可程式化性**：使用者可以透過多種程式語言（如 PL/pgSQL、PL/Python 等）編寫函式和觸發器，以滿足特定需求。
 
----
 
 
 ---
-<style scoped> table {
-width: 90%; /* 设置此幻灯片的表格宽度为50% */
-font-size: 20px; /* 设置字体大小 */ 
-} </style>
+
 ## 版本
 每年的9月會發布新的主要版本，每三個月發布次要版本（錯誤修復）。 每個版本將在首次發布之後第5年11月EOS。
 
@@ -74,10 +71,7 @@ font-size: 20px; /* 设置字体大小 */
 ## 語系
 
 - 不支援Big 5編碼
-<style scoped> table {
-width: 90%; 
-font-size: 14px;
-} </style>
+
 
 | Name           | Description                       | Language                       | Server? | Aliases                |
 | -------------- | --------------------------------- | ------------------------------ | ------- | ---------------------- |
@@ -91,10 +85,8 @@ font-size: 14px;
 | `GBK`          | Extended National Standard        | Simplified Chinese             | No      |                        |
 
 ---
-<style scoped>ul { 
-font-size:20px;
-}
-</style>
+
+
 ## Postgres維護工具
 **Community tools：**
  - pg_：內建工具[3,5]

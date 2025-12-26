@@ -34,11 +34,6 @@ Install-Package Autoupdater.NET.Official
 </item>
 ```
 
-<style scoped>
- ul{
-	 font-size: 20px;
- }
-</style>
 - `<version>`：你要釋出的新版本號。
     
 - `<url>`：新版安裝程式或壓縮檔下載網址。
@@ -94,13 +89,7 @@ private void Form1_Load(object sender, EventArgs e)
 ## **4. 進階設定（可選）（Cont'd）**
 
 
-<style scoped>
-pre { line-height: 0.5 !important; }
-pre code{
-	font-size: 16px;
-	line-height: 1; 
-}
-</style>
+
 ```csharp
 private void SetupAutoUpdater()
 {
@@ -150,14 +139,7 @@ private void SetupAutoUpdater()
 
 ## 6. 運行結果
 
-<style scoped>
-img{
-	width:50%; 
-	height:auto;
-	display: block; 
-	margin: 0 auto;
-}
-</style>
+
 
 ![width 50%](．紀錄｜AutoUpdater.Net/pictures/Updater.png)
 
