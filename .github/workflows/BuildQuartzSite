@@ -1,0 +1,51 @@
+# This is a basic workflow to help you get started with Actions
+
+name: Build Quartz Site
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the "v4" branch
+  push:
+    branches: [ "v4" ]
+  pull_request:
+    branches: [ "v4" ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+       - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Build Quartz
+        uses: konstfish/quartz-build-action@v5
+        with:
+          # 這裡改成你 Markdown 的資料夾，例如 content 或 docs
+          source: content
+          # 如果有客製就填實際路徑，沒有可以先拿掉這兩行
+          quartz_config: quartz.config.ts
+          quartz_layout: quartz.layout.ts
+          page_title: "HXuanHui Notes"
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
