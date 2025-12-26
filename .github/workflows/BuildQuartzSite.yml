@@ -1,12 +1,8 @@
 name: Build Quartz Site
 
 on:
-  # 只在 v4 分支 push / PR 時觸發
   push:
     branches: ["v4"]
-  pull_request:
-    branches: ["v4"]
-  # 也可以在 Actions tab 手動觸發
   workflow_dispatch:
 
 permissions:
@@ -22,21 +18,25 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Install deps
+        run: npm ci
+
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
       - name: Build Quartz
-        uses: konstfish/quartz-build-action@v5
-        with:
-          # 這裡改成你 Markdown 的資料夾，例如 content 或 docs
-          source: content
-          # 如果有客製就填實際路徑，沒有就先刪掉這兩行
-          quartz_config: quartz.config.ts
-          quartz_layout: quartz.layout.ts
-          page_title: "HXuanHui Notes"
+        run: npx quartz build
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
+        with:
+          # Quartz 預設輸出在 public/，如果你有改，這裡一起改
+          path: public
 
   deploy:
     runs-on: ubuntu-latest
