@@ -1,0 +1,859 @@
+--產生時間:2025/06/26 09:55:16
+--系統名稱:財務基礎檔系統
+--系統代號:CGHASBS
+--表格名稱:RASBDEPT(部門資料檔)
+
+create table ASB.RASBDEPT
+(ORGNID                        VARCHAR(1)                                --【01】機構別
+,DPID                          VARCHAR(5)                                --【02】部門代號
+,CNM                           VARCHAR(40)                               --【03】中文名稱
+,LOC                           CHAR(1)                                   --【04】院區別
+,FID                           VARCHAR(1)                                --【05】費用別
+,DPKD                          VARCHAR(2)                                --【06】部門類別
+,SHRLOC                        VARCHAR(1)                                --【07】分攤院區別
+,CANCDAT                       TIMESTAMP                                 --【08】取消日
+,REDTRDP                       VARCHAR(5)                                --【09】擬轉換部門
+,EFDAT                         TIMESTAMP                                 --【10】生效日
+,BFDPID                        VARCHAR(5)                                --【11】前部門代號
+,OPID                          VARCHAR(4)                                --【12】欄位12
+,SHRLOCOLD                     VARCHAR(1)                                --【13】分攤方式
+,CNM_OUT                       VARCHAR(40)                               --【14】對外名稱
+,CNM_ENG                       VARCHAR(120)                              --【15】英文名稱
+,SHR                           NUMERIC (2)                               --【16】欄位16
+,USCLODAT                      TIMESTAMP                                 --【17】使用截止日
+,TXDAT                         TIMESTAMP                                 --【18】異動日期
+,TXEMP                         VARCHAR(10)                               --【19】異動人員
+,BK1                           VARCHAR(10)                               --【20】健保申報科別
+,BK2                           VARCHAR(10)                               --【21】職務屬性
+,BK3                           VARCHAR(10)                               --【22】部處
+,BK4                           VARCHAR(10)                               --【23】薪資類別
+,BK5                           VARCHAR(10)                               --【24】欄位24
+)  tablespace  cgmpgst_table;
+
+--【Add Primary Key】
+alter table ASB.RASBDEPT add  constraint
+   PK_RASBDEPT  primary key (ORGNID,DPID)
+   using index
+tablespace  cgmpgst_index;
+
+Grant select, insert, update, delete on ASB.RASBDEPT to CGHASB;
+
+--產生時間:2025/06/26 09:55:16
+--系統名稱:收費標準系統
+--系統代號:CGHFES
+--表格名稱:RFESINSR(本院收費標準檔)
+
+create table FES.RFESINSR
+(RCFNO                         VARCHAR(15)                               --【01】收費編號
+,RCPID                         VARCHAR(3)             Not null                      --【02】收據代號
+,RCFAMT                        NUMERIC (10,2)         Not null                      --【03】收費金額
+,DFAMT                         NUMERIC (9,2)                             --【04】差額
+,UN                            VARCHAR(2)                                --【05】單位
+,OPPTS                         NUMERIC (5,0)                             --【06】手術點數
+,RSTRNQTY                      NUMERIC (5,0)                             --【07】限制數量
+,ENM                           VARCHAR(500)                              --【08】英文名稱
+,CNM                           VARCHAR(500)                              --【09】中文名稱
+,CTLID                         VARCHAR(1)                                --【10】管制代號
+,SPCTLMK                       VARCHAR(1)                                --【11】特殊管制註記
+,IPDRIDMK                      VARCHAR(1)                                --【12】輸入醫師代號註記
+,OPDODRPRTGRP                  VARCHAR(2)                                --【13】門診醫囑列單群組
+,ODRCHGMK                      VARCHAR(1)                                --【14】醫囑計價註記
+,OPDADMCTLMK                   VARCHAR(1)                                --【15】門診住院管制註記
+,FRTDATCTLMK                   VARCHAR(1)                                --【16】起迄日期管制註記
+,PFR1                          NUMERIC (6,5)          Not null                      --【17】醫師費比率一
+,PFR2                          NUMERIC (6,5)                             --【18】醫師費比率二
+,AFTDVDR                       NUMERIC (6,5)                             --【19】後段拆分比率
+,COSTANIDT                     VARCHAR(1)                                --【20】成本分析資料
+,AMTNONFIXMK                   VARCHAR(1)                                --【21】金額不固定註記
+,OPMK                          VARCHAR(1)                                --【22】手術註記
+,DGENSERVFMK                   VARCHAR(1)                                --【23】藥事服務費註記
+,GFDAT                         TIMESTAMP                                 --【24】建檔日期
+,TXDAT                         TIMESTAMP                                 --【25】異動日期
+,OPID                          VARCHAR(4)                                --【26】操作員代號
+,TRMID                         VARCHAR(4)                                --【27】終端機代號
+,TREPACMK                      VARCHAR(1)                                --【28】處置包註記
+,PTS                           NUMERIC (9,3)                             --【29】RBRVS點數
+,DRSFOP                        VARCHAR(1)                                --【30】醫師親自操作
+,XREMA                         VARCHAR(600)                              --【31】說明A
+,MK1                           VARCHAR(10)                               --【32】說明1
+,GDCTL                         VARCHAR(1)                                --【33】層級管制
+,MK2                           VARCHAR(10)                               --【34】說明2
+,MK3                           VARCHAR(10)                               --【35】說明3
+,XREM                          VARCHAR(200)                              --【36】備註
+,MK4                           VARCHAR(20)                               --【37】說明4
+,EFDAT                         TIMESTAMP                                 --【38】生效日期
+,MK5                           VARCHAR(20)                               --【39】說明5
+,MK6                           VARCHAR(20)                               --【40】說明6
+,CLODAT                        TIMESTAMP                                 --【41】截止日期
+,MDMK                          VARCHAR(10)                               --【42】執行醫事人員註記
+)  tablespace  cgmpgst_table;
+
+--【Add Primary Key】
+alter table FES.RFESINSR add  constraint
+   PK_RFESINSR  primary key (RCFNO)
+   using index
+tablespace  cgmpgst_index;
+
+--【Create Index】
+create index idx_RFESINSR_RCFNO_ENM
+ on FES.RFESINSR(RCFNO,ENM)
+tablespace  cgmpgst_index;
+
+Grant select, insert, update, delete on FES.RFESINSR to CGHFES;
+
+Grant select, insert, update, delete on CNS.RCNSTRFREC01 to CGHCNS;
+--產生時間:2025/06/26 09:55:16
+--系統名稱:人事系統
+--系統代號:CGHHPN
+--表格名稱:RHPNLICA(證照管理主檔)
+
+create table HPN.RHPNLICA
+(IDNO                          VARCHAR(10)            Not null                      --【01】身分證號碼
+,LICENSEID                     VARCHAR(1)             Not null                      --【02】證照代號
+,LICENSEARE                    VARCHAR(10)                               --【03】證照地區
+,LICENSEKD                     VARCHAR(10)                               --【04】證照類別
+,LICENSENO                     VARCHAR(20)                               --【05】證照號碼
+,ISLDAT                        TIMESTAMP                                 --【06】發證日期
+,DLDAT                         TIMESTAMP                                 --【07】有效日期
+,GFDAT                         TIMESTAMP                                 --【08】建檔日期
+,TXDAT                         TIMESTAMP                                 --【09】異動日期
+,SCTYID                        VARCHAR(2)                                --【10】停歇業註記
+,SCTYNM                        VARCHAR(30)                               --【11】執業科別二
+,IPEMP                         VARCHAR(10)                               --【12】輸入人員
+,PSSPRTNO                      VARCHAR(10)                               --【13】護照號碼
+,DRID                          VARCHAR(6)                                --【14】執業科別
+,DVID                          VARCHAR(2)                                --【15】專科代號
+,DVNM                          VARCHAR(30)                               --【16】專科名稱
+,FRDAT                         TIMESTAMP                                 --【17】起始日期
+,CLODAT                        TIMESTAMP                                 --【18】截止日期
+,CRTFCTNO                      VARCHAR(10)                               --【19】證書號碼
+)  tablespace  cgmpgst_table;
+
+--【Add Primary Key】
+alter table HPN.RHPNLICA add  constraint
+   PK_RHPNLICA  primary key (IDNO,LICENSEID,DVID)
+   using index
+tablespace  cgmpgst_index;
+
+Grant select, insert, update, delete on HPN.RHPNLICA to CGHHPN;
+--產生時間:2025/06/26 09:55:16
+--系統名稱:門診批價系統
+--系統代號:CGHOPB
+--表格名稱:ROPBCGBA(門診批價基本資料)
+
+create table OPB.ROPBCGBA
+(OPDNO                         VARCHAR(13)                               --【01】門診號
+,CHTNO                         VARCHAR(12)            Not null                      --【02】病歷號
+,LOC                           VARCHAR(1)             Not null                      --【03】院區別
+,RGSDPT                        VARCHAR(5)             Not null                      --【04】掛號科別
+,MAID                          VARCHAR(4)             Not null                      --【05】主治醫師代號
+,SHF                           VARCHAR(2)                                --【06】診別
+,FRRVSTID                      VARCHAR(1)                                --【07】初複診別
+,INSUUID                       VARCHAR(1)             Not null   default 'A'        --【08】保險識別碼
+,NHICRDOPDVSSQNO               VARCHAR(4)                                --【09】健保卡看診序號
+,PTTRINCLINID                  VARCHAR(10)                               --【10】病患轉入院所代號
+,PTTROTMK                      VARCHAR(1)             Not null   default 'N'        --【11】病患轉出註記
+,DSSID1                        VARCHAR(5)             Not null                      --【12】疾病代號一
+,DSSID2                        VARCHAR(5)                                --【13】疾病代號二
+,DSSID3                        VARCHAR(5)                                --【14】疾病代號三
+,DSSID4                        VARCHAR(5)                                --【15】疾病代號四
+,DSSID5                        VARCHAR(5)                                --【16】疾病代號五
+,DSSID6                        VARCHAR(5)                                --【17】疾病代號六
+,CHRDSMK                       VARCHAR(1)                                --【18】慢性病註記
+,NHIRIMBKD                     VARCHAR(1)                                --【19】健保給付類別
+,COPID                         VARCHAR(1)                                --【20】部分負擔代號
+,FDISMK                        VARCHAR(1)                                --【21】交付調劑註記
+,CHRDSPSRODDAT                 TIMESTAMP                                 --【22】慢性病處方箋開單日期
+,CTNTRSHTMK                    VARCHAR(1)             Not null   default 'N'        --【23】繼續治療單註記
+,PDCNT                         VARCHAR(2)                                --【24】療程次數
+,PDBGNDAT                      TIMESTAMP                                 --【25】療程開始日期
+,PDENDDAT                      TIMESTAMP                                 --【26】療程結束日期
+,CLAUID                        VARCHAR(1)                                --【27】結帳識別碼
+,INSFLDAT                      VARCHAR(8)                                --【28】上檔日期
+,GETDGNO                       VARCHAR(5)                                --【29】領藥號碼
+,OPID                          VARCHAR(4)                                --【30】操作員代號
+,TRMID                         VARCHAR(4)                                --【31】終端機代號
+,ODOPDNO                       VARCHAR(13)                               --【32】舊門診案號
+,CLADAT                        VARCHAR(8)                                --【33】結帳日期
+,WG                            VARCHAR(3)                                --【34】體重
+,NHIEXTSQNO                    VARCHAR(1)                                --【35】健保擴充序號
+,IMPTSICMK                     VARCHAR(1)                                --【36】重大傷病註記
+,OPDCSPYMK                     VARCHAR(1)                                --【37】門診論病例計酬註記
+,DISPSQNO                      NUMERIC (3)                               --【38】調劑序號
+,AVDISPCNT                     NUMERIC (3)                               --【39】可調劑次數
+,CLCOP                         NUMERIC (9)                               --【40】代收部分負擔
+,COP1                          NUMERIC (9)                               --【41】部分負擔一
+,COP2                          NUMERIC (9)                               --【42】部分負擔二
+,CRDR                          VARCHAR(4)                                --【43】申報醫師
+,XREM                          VARCHAR(500)                              --【44】備註
+,PART                          NUMERIC (13,4)                            --【45】部分負擔
+,DGPART                        NUMERIC (13,4)                            --【46】藥品部分負擔
+,HGPART                        NUMERIC (13,4)                            --【47】高診次部分負擔
+,EGPART                        NUMERIC (13,4)                            --【48】檢查(驗)部分負擔
+,HCPLACE                       VARCHAR(50)                               --【49】訪視地點
+)  tablespace  cgmpgst_table;
+
+--【Add Primary Key】
+alter table OPB.ROPBCGBA add  constraint
+   PK_ROPBCGBA  primary key (OPDNO)
+   using index
+tablespace  cgmpgst_index;
+
+--【Create Index】
+create index idx_ROPBCGBA_OPDNO
+ on OPB.ROPBCGBA(OPDNO)
+tablespace  cgmpgst_index;
+
+Grant select, insert, update, delete on OPB.ROPBCGBA to CGHOPB;
+--產生時間:2025/06/26 09:55:16
+--系統名稱:門診批價系統
+--系統代號:CGHOPB
+--表格名稱:ROPBCGDA(門診批價明細資料)
+
+create table OPB.ROPBCGDA
+(OPDNO                         VARCHAR(13)                               --【01】門診號
+,RCFNO                         VARCHAR(15)                               --【02】收費編號
+,CHRGDAT                       TIMESTAMP                                 --【03】批價日期
+,CHRGTYUID                     VARCHAR(1)                                --【04】批價方式識別碼
+,DLTCHRGDTUID                  VARCHAR(1)                                --【05】刪除批價資料識別碼
+,NHISFPADUID                   VARCHAR(1)                                --【06】健保自付識別碼
+,CHRGQTY                       NUMERIC (5)            Not null                      --【07】批價數量
+,CGHRCFAMT                     NUMERIC (13,4)         Not null                      --【08】本院收費金額
+,PTSFPADAMT                    NUMERIC (13,4)         Not null                      --【09】病患自付金額
+,NHIRIMBAMT                    NUMERIC (13,4)         Not null                      --【10】健保給付金額
+,NHINO1                        VARCHAR(15)                               --【11】健保編號一
+,NHIQTY1                       NUMERIC (7,2)                             --【12】健保數量一
+,NHIPTS1                       NUMERIC (13,4)                            --【13】健保點數一
+,NHIPADTMS1                    NUMERIC (5,4)                             --【14】健保支付成數一
+,NHINO2                        VARCHAR(15)                               --【15】健保編號二
+,NHIQTY2                       NUMERIC (7,2)                             --【16】健保數量二
+,NHIPTS2                       NUMERIC (13,4)                            --【17】健保點數二
+,NHIPADTMS2                    NUMERIC (5,4)                             --【18】健保支付成數二
+,NHINO3                        VARCHAR(15)                               --【19】健保編號三
+,NHIQTY3                       NUMERIC (7,2)                             --【20】健保數量三
+,NHIPTS3                       NUMERIC (13,4)                            --【21】健保點數三
+,NHIPADTMS3                    NUMERIC (5,4)                             --【22】健保支付成數三
+,CHRGDPTID                     VARCHAR(5)             Not null                      --【23】批價科別代號
+,PFDRID                        VARCHAR(4)                                --【24】醫師費醫師代號
+,SUPSTK                        VARCHAR(5)                                --【25】補充庫台
+,RXNORUT                       VARCHAR(4)                                --【26】給藥途徑
+,DSG                           VARCHAR(11)                               --【27】劑量
+,DSGUN                         VARCHAR(3)                                --【28】劑量單位
+,FRQ                           VARCHAR(4)                                --【29】頻率
+,DYS                           NUMERIC (3)                               --【30】天數
+,TQTY                          NUMERIC (10)                              --【31】總量
+,STTUID                        VARCHAR(1)                                --【32】急件識別碼
+,RCFNM                         VARCHAR(500)                              --【33】收費名稱
+,RCPID                         VARCHAR(3)                                --【34】收據代號
+,CHGUN                         VARCHAR(3)                                --【35】計價單位
+,PEMLAFMLID                    VARCHAR(1)                                --【36】飯前飯後代號
+,OPID                          VARCHAR(4)                                --【37】操作員代號
+,TRMID                         VARCHAR(4)                                --【38】終端機代號
+,TRANSID                       VARCHAR(25)                               --【39】交易序號
+)  tablespace  cgmpgst_table;
+
+--【Add Primary Key】
+alter table OPB.ROPBCGDA add  constraint
+   PK_ROPBCGDA  primary key (OPDNO,RCFNO,CHRGDAT)
+   using index
+tablespace  cgmpgst_index;
+
+--【Create Index】
+create index idx_ROPBCGDA_O_R_C
+ on OPB.ROPBCGDA(OPDNO,RCFNO,CHRGDAT)
+tablespace  cgmpgst_index;
+
+Grant select, insert, update, delete on OPB.ROPBCGDA to CGHOPB;
+--產生時間:2025/06/26 09:55:16
+--系統名稱:門診批價系統
+--系統代號:CGHOPB
+--表格名稱:ROPBMATB(門診轉計價主檔)
+
+create table OPB.ROPBMATB
+(MATNO                         VARCHAR(20)                               --【01】計價單號
+,SORKD                         VARCHAR(5)             Not null                      --【02】來源作業別
+,OPDNO                         VARCHAR(13)                               --【03】門診號
+,CHTNO                         VARCHAR(12)                               --【04】病歷號
+,LOC                           VARCHAR(1)                                --【05】院區
+,RGSDPT                        VARCHAR(5)                                --【06】科別
+,MAID                          VARCHAR(4)                                --【07】主治醫師
+,SHF                           VARCHAR(2)                                --【08】診別
+,INSUUID                       VARCHAR(1)                                --【09】保險別
+,NHICRDOPDVSSQNO               VARCHAR(4)                                --【10】健保卡號
+,PTTRINCLINID                  VARCHAR(10)                               --【11】轉入院所代號
+,PTTROTMK                      VARCHAR(1)                                --【12】轉出註記
+,DSSID1                        VARCHAR(5)                                --【13】疾病碼1
+,DSSID2                        VARCHAR(5)                                --【14】疾病碼2
+,DSSID3                        VARCHAR(5)                                --【15】疾病碼3
+,DSSID4                        VARCHAR(5)                                --【16】疾病碼4
+,DSSID5                        VARCHAR(5)                                --【17】疾病碼5
+,DSSID6                        VARCHAR(5)                                --【18】疾病碼6
+,CHRDSMK                       VARCHAR(1)                                --【19】慢性病註記
+,NHIRIMBKD                     VARCHAR(1)                                --【20】健保給付類別
+,COPID                         VARCHAR(1)                                --【21】部份負擔代號
+,FDISMK                        VARCHAR(1)                                --【22】交付調劑註記
+,CTNTRSHTMK                    VARCHAR(1)                                --【23】繼續治療單註記
+,PDCNT                         VARCHAR(1)                                --【24】療程次數
+,PDBGNDAT                      TIMESTAMP                                 --【25】療程開始日期
+,PDENDDAT                      TIMESTAMP                                 --【26】療程結束日期
+,GETDGNO                       VARCHAR(5)                                --【27】領藥號
+,WG                            VARCHAR(3)                                --【28】體重
+,NHIEXTSQNO                    VARCHAR(1)                                --【29】健保擴充序號
+,IMPTSICMK                     VARCHAR(1)                                --【30】重大傷病註記
+,OPDCSPYMK                     VARCHAR(1)                                --【31】門診論病例計酬註記
+,DISPSQNO                      NUMERIC (3)                               --【32】調劑序號
+,AVDISPCNT                     NUMERIC (3)                               --【33】可調劑次數
+,CRDR                          VARCHAR(4)                                --【34】申報醫師
+,SORNO                         VARCHAR(20)                               --【35】來源單號
+,SOROPID                       VARCHAR(4)                                --【36】來源人員
+,SORTRMID                      VARCHAR(4)                                --【37】來源機臺
+,EXCOPID                       VARCHAR(4)                                --【38】計價人員
+,EXCTRMID                      VARCHAR(4)                                --【39】計價機臺
+,CHINSDAT                      VARCHAR(8)             Not null                      --【40】計價寫檔日期
+,CHINSTM                       TIMESTAMP                                 --【41】計價寫檔日期時間
+,CHCODE                        VARCHAR(40)                               --【42】計價結果
+,CHOPDNO                       VARCHAR(13)                               --【43】計價門診號
+,CHTM                          TIMESTAMP                                 --【44】計價時間
+,DCINSDAT                      VARCHAR(8)                                --【45】撤銷寫檔日期
+,DCINSTM                       TIMESTAMP                                 --【46】撤銷寫檔時間
+,DCCODE                        VARCHAR(40)                               --【47】撤銷結果
+,DCOPDNO                       VARCHAR(13)                               --【48】撤銷門診號
+,DCTM                          TIMESTAMP                                 --【49】撤銷時間
+,SORGRP                        VARCHAR(20)                               --【50】來源群組號
+,XREM                          VARCHAR(500)                              --【51】備註
+,DCAUDDAT                      VARCHAR(8)                                --【52】覆核撤銷日期
+,DCAUDTM                       TIMESTAMP                                 --【53】覆核撤銷時間
+,DCAUDIDNO                     VARCHAR(10)                               --【54】覆核撤銷人員
+,RCVDAT                        VARCHAR(8)                                --【55】收件日期
+,RCVTM                         TIMESTAMP                                 --【56】收件時間
+,RCVIDNO                       VARCHAR(10)                               --【57】收件人員
+,RPTDAT                        VARCHAR(8)                                --【58】報告日期
+,RPTTM                         TIMESTAMP                                 --【59】報告時間
+,RPTIDNO                       VARCHAR(10)                               --【60】報告人員
+,CSN                           VARCHAR(12)                               --【61】住院號
+,HCPLACE                       VARCHAR(50)                               --【62】訪視地點
+,MDRSLS                        VARCHAR(20)                               --【63】醫療資源缺乏
+)  tablespace  cgmpgst_table;
+
+--【Add Primary Key】
+alter table OPB.ROPBMATB add  constraint
+   PK_ROPBMATB  primary key (MATNO)
+   using index
+tablespace  cgmpgst_index;
+
+--【Create Index】
+create index idx_ROPBMATB_OPDNO
+ on OPB.ROPBMATB(OPDNO)
+tablespace  cgmpgst_index;
+
+--【Create Index】
+create index idx_ROPBMATB_CHTNO
+ on OPB.ROPBMATB(CHTNO)
+tablespace  cgmpgst_index;
+
+--【Create Index】
+create index idx_ROPBMATB_SORKD
+ on OPB.ROPBMATB(SORKD)
+tablespace  cgmpgst_index;
+
+--【Create Index】
+create index idx_ROPBMATB_SORNO
+ on OPB.ROPBMATB(SORNO)
+tablespace  cgmpgst_index;
+
+--【Create Index】
+create index idx_ROPBMATB_CHINSDAT
+ on OPB.ROPBMATB(CHINSDAT)
+tablespace  cgmpgst_index;
+
+--【Create Index】
+create index idx_ROPBMATB_SORGRP
+ on OPB.ROPBMATB(SORGRP)
+tablespace  cgmpgst_index;
+
+--【Create Index】
+create index idx_ROPBMATB_DCINSDAT
+ on OPB.ROPBMATB(DCINSDAT)
+tablespace  cgmpgst_index;
+
+Grant select, insert, update, delete on OPB.ROPBMATB to CGHOPB;
+--產生時間:2025/06/26 09:55:16
+--系統名稱:門診批價系統
+--系統代號:CGHOPB
+--表格名稱:ROPBMATD(門診轉計價明細檔)
+
+create table OPB.ROPBMATD
+(MATNO                         VARCHAR(20)                               --【01】計價單號
+,RCFNO                         VARCHAR(15)                               --【02】收費編號
+,QTY                           NUMERIC (7,2)          Not null                      --【03】數量
+,SPCM                          VARCHAR(3)                                --【04】檢體
+,PART1                         VARCHAR(3)                                --【05】部位1
+,PART2                         VARCHAR(3)                                --【06】部位2
+,PART3                         VARCHAR(3)                                --【07】部位3
+,PART4                         VARCHAR(3)                                --【08】部位4
+,PART5                         VARCHAR(3)                                --【09】部位5
+,CHRGDPTID                     VARCHAR(5)                                --【10】批價科別
+,EXMDRNO                       VARCHAR(8)                                --【11】檢驗醫師
+,STT                           VARCHAR(1)                                --【12】急件
+,STK                           VARCHAR(5)                                --【13】庫台
+,MK                            VARCHAR(1)                                --【14】醫令註記
+,DSG                           VARCHAR(11)                               --【15】劑量
+,DSGUN                         VARCHAR(3)                                --【16】單位
+,FRQ                           VARCHAR(4)                                --【17】頻率
+,PEMLAFMLID                    VARCHAR(1)                                --【18】飯前飯後
+,EXNORUT                       VARCHAR(4)                                --【19】給藥途徑
+,CHGUN                         VARCHAR(3)                                --【20】計價單位
+,DYS                           NUMERIC (3)                               --【21】天數
+,TQTY                          NUMERIC (7,2)                             --【22】總量
+,SFPADDYS                      NUMERIC (3)                               --【23】自費天數
+,SFPADTQTY                     NUMERIC (7,2)                             --【24】自費總量
+,SERIES                        VARCHAR(1)                                --【25】是否連續處方
+,IPTM                          TIMESTAMP                                 --【26】醫囑日期時間
+,RCFAMT                        NUMERIC (9,2)                             --【27】收費金額
+,OPDOPDQ                       VARCHAR(1)                                --【28】是否健保轉自費
+,MEDICAL                       VARCHAR(1)                                --【29】是否醫療項目
+,BGNDATE                       VARCHAR(14)                               --【30】開始日期時間
+,ENDDATE                       VARCHAR(14)                               --【31】結束日期時間
+,REQNO                         VARCHAR(20)                               --【32】醫囑單號
+,CTMRI                         VARCHAR(20)                               --【33】CTMRI機型
+,PFDRID2                       VARCHAR(4)                                --【34】第二醫師代號
+,EXLCKD                        VARCHAR(2)                                --【35】執行人員類別
+,EXLCNO                        VARCHAR(10)                               --【36】執行人員代號
+,EXIDNO                        VARCHAR(10)                               --【37】執行人員ID
+,SQNO                          NUMERIC (3)                               --【38】序號
+,RCPID                         VARCHAR(3)                                --【39】收據代號
+,CHRGDAT                       TIMESTAMP                                 --【40】批價日期
+,CTMRI_TYPE                    VARCHAR(20)                               --【41】CTMRI機型
+,IGNORE_TNAC                   VARCHAR(1)                                --【42】不檢查排程計價檔
+,IGNORE_ORDER                  VARCHAR(1)                                --【43】不檢查醫囑
+,CHCODE                        VARCHAR(200)                              --【44】批價結果
+,RMID                          VARCHAR(3)                                --【45】手術房間代號
+,OPKD1                         VARCHAR(1)                                --【46】手術類別一
+,OPKD2                         VARCHAR(1)                                --【47】手術類別二
+,OBLC                          VARCHAR(1)                                --【48】手術前傷口分類
+,OALC                          VARCHAR(1)                                --【49】手術後傷口分類
+,ANCC                          VARCHAR(1)                                --【50】麻醉病情分類
+,REGNO                         VARCHAR(21)                               --【51】手術編號
+,PCS1                          VARCHAR(10)                               --【52】手術處置碼一
+,PCS2                          VARCHAR(10)                               --【53】手術處置碼二
+,PCS3                          VARCHAR(10)                               --【54】手術處置碼三
+,IMGSRCNO                      VARCHAR(10)                               --【55】影像來源代號
+,RACHRGMK                      VARCHAR(1)                                --【56】補批價註記
+,LABDISMK                      VARCHAR(1)                                --【57】檢驗折扣註記
+,SFTY                          VARCHAR(1)                                --【58】收費金額類別
+,COPR                          NUMERIC (3,2)                             --【59】部分負擔比率
+,XREM                          VARCHAR(100)                              --【60】備註
+,CHRGTY                        VARCHAR(1)                                --【61】批價方式
+,UP                            NUMERIC (3)                               --【62】接種劑次
+,ISS                           VARCHAR(1)                                --【63】多重創傷註記
+,EFTYPE                        VARCHAR(1)                                --【64】第三區加成註記
+,CONTRACT_CODE                 VARCHAR(50)                               --【65】合約代號
+,CONTRACT_QTY                  NUMERIC (7,2)                             --【66】合約數量
+,CONTRACT_RCFAMT               NUMERIC (15,4)                            --【67】合約單價
+,CONTRACT_TOTAL                NUMERIC (15,4)                            --【68】合約金額
+,DMY_MINUS                     VARCHAR(1)                                --【69】產生虛帳負項註記
+,APPEND_MK                     VARCHAR(1)                                --【70】加作項目註記
+,ODRSHNO                       VARCHAR(20)                               --【71】醫囑單編號
+,RCVNO                         VARCHAR(20)                               --【72】收件號
+)  tablespace  cgmpgst_table;
+
+--【Add Primary Key】
+alter table OPB.ROPBMATD add  constraint
+   PK_ROPBMATD  primary key (MATNO,SQNO)
+   using index
+tablespace  cgmpgst_index;
+
+--【Add Foreign Key】
+alter table OPB.ROPBMATD add constraint
+   fk_ROPBMATD_MATNO foreign key (MATNO)
+   references OPB.ROPBMATB(MATNO) ON DELETE CASCADE;
+
+Grant select, insert, update, delete on OPB.ROPBMATD to CGHOPB;
+--產生時間:2025/06/26 09:55:16
+--系統名稱:門診批價系統
+--系統代號:CGHOPB
+--表格名稱:ROPDIC(健保IC卡資料)
+
+create table OPB.ROPDIC
+(OPDNO                         VARCHAR(16)                               --【01】門診號
+,CRDNO                         VARCHAR(12)            Not null                      --【02】IC卡號
+,CHTNO                         VARCHAR(12)                               --【03】病歷號
+,OPDVSDATTM                    VARCHAR(13)            Not null                      --【04】看診日期時間
+,IDJMK                         VARCHAR(1)                                --【05】身份註記
+,EFDAT                         VARCHAR(7)                                --【06】卡片有效期限
+,ABLEFRQNCE                    VARCHAR(2)                                --【07】就醫可用次數
+,LSTGTDSQNO                    VARCHAR(7)                                --【08】最近一次就醫序號
+,NBRNDAT                       VARCHAR(7)                                --【09】新生兒出生日期
+,NBRNNO                        VARCHAR(1)                                --【10】新生兒胞胎註記
+,GTDKD                         VARCHAR(2)             Not null                      --【11】就醫類別
+,NBRNGTD                       VARCHAR(1)                                --【12】新生兒就醫註記
+,RACRDMK                       NUMERIC (1)            Not null                      --【13】補卡註記
+,YEARCNT                       NUMERIC (3)                               --【14】年度就醫累計資料
+,CUMCNT                        NUMERIC (4)                               --【15】門住診就醫累計次數
+,HLTHCAREMK                    VARCHAR(2)                                --【16】保健服務項目註記
+,HCEXMDAT                      VARCHAR(7)                                --【17】保健服務檢查日期
+,HCLOCNO                       VARCHAR(10)                               --【18】保健服務院所代碼
+,HCEXMNO                       VARCHAR(2)                                --【19】保健服務檢查項目代碼
+,TEL1                          VARCHAR(10)                               --【20】緊急聯絡電話一
+,TEL2                          VARCHAR(10)                               --【21】緊急聯絡電話二
+,ATNTEXMDAT                    VARCHAR(7)                                --【22】產檢日期
+,ATNTLOCNO                     VARCHAR(10)                               --【23】產檢院所代碼
+,ATNTEXMNO                     VARCHAR(2)                                --【24】產檢項目代碼
+,GTDSQNO                       NUMERIC (22)                              --【25】就醫序號
+,IDNO                          VARCHAR(10)            Not null                      --【26】身分証字號
+,BRNDAT                        VARCHAR(7)             Not null                      --【27】出生日期
+,HOSCLINID                     VARCHAR(10)            Not null                      --【28】醫療院所代號
+,SAFESIGN                      VARCHAR(1000)                             --【29】安全簽章
+,MK                            VARCHAR(20)                               --【30】註記
+,DTTYPE                        VARCHAR(1)             Not null                      --【31】資料型態
+,DTFRM                         VARCHAR(2)             Not null                      --【32】資料格式
+,SAFEID                        VARCHAR(12)                               --【33】安全代碼
+,IPDAT                         VARCHAR(8)                                --【34】輸入日期
+,GTDSQNO2                      VARCHAR(4)                                --【35】就醫序號2
+,ODRKD                         VARCHAR(1)                                --【36】醫令類別
+,DRIDNO                        VARCHAR(10)                               --【37】醫師身分證號碼
+,RCFID                         VARCHAR(15)                               --【38】收費代碼
+,PART                          VARCHAR(6)                                --【39】部位
+,TVMK                          VARCHAR(5)                                --【40】過敏註記
+,TVC                           VARCHAR(300)                              --【41】過敏內容
+,USG                           VARCHAR(18)                               --【42】用法
+,DYS                           NUMERIC (22)                              --【43】天數
+,XREM                          VARCHAR(200)                              --【44】備註
+,TQTY                          NUMERIC (22)                              --【45】總量
+,DLVRMK                        NUMERIC (22)                              --【46】註記
+,RIMBKD                        VARCHAR(10)                               --【47】給付類別
+,BEDNO                         VARCHAR(20)                               --【48】床位號
+,TREAT_NUMBER_M15              VARCHAR(100)                              --【49】就醫識別碼
+,TREAT_NUMBER_M16              VARCHAR(100)                              --【50】補驗卡的就醫識別碼
+,TREAT_NUMBER_M52              VARCHAR(100)                              --【51】原就醫識別碼
+)  tablespace  cgmpgst_table;
+
+--【Add Primary Key】
+alter table OPB.ROPDIC add  constraint
+   PK_ROPDIC  primary key (CRDNO,OPDVSDATTM)
+   using index
+tablespace  cgmpgst_index;
+
+--【Create Index】
+create index idx_ROPDIC_CHTNO
+ on OPB.ROPDIC(CHTNO)
+tablespace  cgmpgst_index;
+
+--【Create Index】
+create index idx_ROPDIC_IPDAT
+ on OPB.ROPDIC(IPDAT)
+tablespace  cgmpgst_index;
+
+Grant select, insert, update, delete on OPB.ROPDIC to CGHOPB;
+--產生時間:2025/06/26 09:55:16
+--系統名稱:門診醫囑系統
+--系統代號:CGHOPD
+--表格名稱:ROPDICCJ(門診IC卡過卡紀錄)
+
+create table OPD.ROPDICCJ
+(OPDNO                         VARCHAR(13)                               --【01】門診號
+,ICCARDNO                      VARCHAR(12)                               --【02】IC卡號
+,TREAT_ITEM                    VARCHAR(2)                                --【03】就醫類別
+,SEQUENCE_NUMBER               VARCHAR(4)                                --【04】就醫序號
+,VISIT_TIMES_LEFT              VARCHAR(2)                                --【05】就醫可用次數
+,LAST_SEQUENCE_NUMBER          VARCHAR(7)                                --【06】最近一次就醫序號
+,PATIENT_GROUP                 VARCHAR(1)                                --【07】身份註記
+,VALID_DATE                    VARCHAR(7)                                --【08】卡片有效期限
+,HOSPITAL_ID                   VARCHAR(10)                               --【09】醫療院所代號
+,SEQURITY                      VARCHAR(1000)                             --【10】安全簽章
+,VISIT_DATE                    VARCHAR(13)                               --【11】就診日期時間
+,BABY_SEQUENCE                 VARCHAR(1)                                --【12】新生兒就醫註記
+,BABY_AMOUNT                   NUMERIC (1)                               --【13】新生兒胞胎註記
+,BABY_BIRTHDAY                 VARCHAR(7)                                --【14】新生兒出生日期
+,TRMNO                         VARCHAR(4)                                --【15】終端機編號
+,IPTM                          TIMESTAMP              default CURRENT_TIMESTAMP  --【16】輸入時間
+,SAM_ID                        VARCHAR(12)                               --【17】晶片代號
+,IDNO                          VARCHAR(10)                               --【18】身分證字號
+,BIRTHDAY                      VARCHAR(7)                                --【19】生日
+,ODRKD                         VARCHAR(1)                                --【20】醫令類別
+,RCFID                         VARCHAR(15)                               --【21】醫令代碼
+,PART                          VARCHAR(6)                                --【22】部位
+,USG                           VARCHAR(18)                               --【23】用法用量
+,DYS                           NUMERIC (2)                               --【24】天數
+,TQTY                          NUMERIC (7)                               --【25】總量
+,DLVRMK                        NUMERIC (2)                               --【26】註記
+,TVMK                          VARCHAR(5)                                --【27】過敏註記
+,TVC                           VARCHAR(300)                              --【28】過敏內容
+)  tablespace  cgmpgst_table;
+
+--【Add Primary Key】
+alter table OPD.ROPDICCJ add  constraint
+   PK_ROPDICCJ  primary key (OPDNO)
+   using index
+tablespace  cgmpgst_index;
+
+--【Add Foreign Key】
+alter table OPD.ROPDICCJ add constraint
+   fk_ROPDICCJ_OPDNO foreign key (OPDNO)
+   references OPD.ROPDOPDF(OPDNO) ON DELETE CASCADE;
+
+Grant select, insert, update, delete on OPD.ROPDICCJ to CGHOPD;
+--產生時間:2025/06/26 09:55:16
+--系統名稱:門診醫囑系統
+--系統代號:CGHOPD
+--表格名稱:ROPDICCS(寫入IC卡費用)
+
+create table OPD.ROPDICCS
+(OPDNO                         VARCHAR(13)                               --【01】門診號
+,GROUPNO                       VARCHAR(8)                                --【02】第幾組
+,FEE                           NUMERIC                                   --【03】就醫費用
+,ADDITIONAL_PAY                NUMERIC                                   --【04】部分負擔
+,VISIT_DATE                    VARCHAR(14)                               --【05】就診日期時間
+,IDNO                          VARCHAR(11)                               --【06】身分證號碼
+,BIRTHDAY                      VARCHAR(8)                                --【07】生日
+,IPTM                          TIMESTAMP                                 --【08】輸入時間
+,TRMNO                         VARCHAR(4)                                --【09】機台編號
+)  tablespace  cgmpgst_table;
+
+--【Add Primary Key】
+alter table OPD.ROPDICCS add  constraint
+   PK_ROPDICCS  primary key (OPDNO,GROUPNO)
+   using index
+tablespace  cgmpgst_index;
+
+Grant select, insert, update, delete on OPD.ROPDICCS to CGHOPD;
+--產生時間:2025/06/26 09:55:16
+--系統名稱:門診醫囑系統
+--系統代號:CGHOPD
+--表格名稱:ROPDIMPT(IC卡重大傷病註記)
+
+create table OPD.ROPDIMPT
+(IDNO                          VARCHAR(10)                               --【01】身分証
+,DSSID                         VARCHAR(10)                               --【02】疾病代號
+,START_DATE                    VARCHAR(7)                                --【03】有效期限起始日
+,END_DATE                      VARCHAR(7)                                --【04】有效期限終止日
+,OPDNO                         VARCHAR(13)                               --【05】門診號
+,IPTM                          TIMESTAMP              default CURRENT_TIMESTAMP  --【06】輸入時間
+,TRMNO                         VARCHAR(4)                                --【07】機台編號
+,DISABLED                      VARCHAR(1)                                --【08】註銷
+,DISABLED_IDNO                 VARCHAR(10)                               --【09】註銷者之身分證字號
+,DISABLED_TRMNO                VARCHAR(4)                                --【10】註銷機台
+,DISABLED_IPTM                 TIMESTAMP                                 --【11】註銷日期時間
+)  tablespace  cgmpgst_table;
+
+--【Add Primary Key】
+alter table OPD.ROPDIMPT add  constraint
+   PK_ROPDIMPT  primary key (IDNO,DSSID,START_DATE,END_DATE)
+   using index
+tablespace  cgmpgst_index;
+
+Grant select, insert, update, delete on OPD.ROPDIMPT to CGHOPD;
+--產生時間:2025/06/26 09:55:16
+--系統名稱:病患基本資料系統
+--系統代號:CGHPRS
+--表格名稱:RPRSADD(地址檔)
+
+create table PRS.RPRSADD
+(CHTNO                         VARCHAR(12)                               --【01】病歷號
+,CITY                          VARCHAR(10)                               --【02】縣市
+,ADR                           VARCHAR(500)                              --【03】地址
+)  tablespace  cgmpgst_table;
+
+--【Add Primary Key】
+alter table PRS.RPRSADD add  constraint
+   PK_RPRSADD  primary key (CHTNO)
+   using index
+tablespace  cgmpgst_index;
+
+--【Create Index】
+create index idx_RPRSADD_CHTNO
+ on PRS.RPRSADD(CHTNO)
+tablespace  cgmpgst_index;
+
+Grant select, insert, update, delete on PRS.RPRSADD to CGHPRS;
+--產生時間:2025/06/26 09:55:16
+--系統名稱:病患基本資料系統
+--系統代號:CGHPRS
+--表格名稱:RPRSIMPT(病患重大傷病資料檔)
+
+create table PRS.RPRSIMPT
+(CHTNO                         VARCHAR(12)                               --【01】病歷號
+,IMPTSICCRDNO                  VARCHAR(10)                               --【02】重大傷病卡號
+,IDNO                          VARCHAR(10)                               --【03】身分證字號
+,EFDAT                         VARCHAR(8)                                --【04】生效日期
+,CLODAT                        VARCHAR(8)                                --【05】截止日期
+,DSSNM                         VARCHAR(70)                               --【06】疾病名稱
+,TXDAT                         TIMESTAMP                                 --【07】異動日期
+,TXEMP                         VARCHAR(3)                                --【08】異動人員
+,LOC                           VARCHAR(1)                                --【09】異動院區
+,DSSID                         VARCHAR(6)                                --【10】疾病代碼
+)  tablespace  cgmpgst_table;
+
+Grant select, insert, update, delete on PRS.RPRSIMPT to CGHPRS;
+--產生時間:2025/06/26 09:55:16
+--系統名稱:病患基本資料系統
+--系統代號:CGHPRS
+--表格名稱:RPRSPDB(病患基本資料)
+
+create table PRS.RPRSPDB
+(CHTNO                         VARCHAR(12)                               --【01】病歷號
+,IDNO                          VARCHAR(10)                               --【02】身分證號碼
+,CNM                           VARCHAR(10)            Not null                      --【03】中文姓名
+,SEX                           VARCHAR(1)             Not null                      --【04】性別
+,ENM                           VARCHAR(20)            Not null                      --【05】英文姓名
+,BRNDAT                        VARCHAR(8)             Not null                      --【06】出生日期
+,TEL                           VARCHAR(15)                               --【07】電話號碼
+,FRVSTDAT                      TIMESTAMP              Not null                      --【08】初診日期
+,ARENO                         VARCHAR(3)                                --【09】區域號碼
+,FNLOPDVSDAT                   TIMESTAMP                                 --【10】最後看診日
+,FNLCKINDAT                    TIMESTAMP                                 --【11】最後劃回日
+,ADMMK                         VARCHAR(1)                                --【12】住院註記
+,FAXNO                         VARCHAR(11)                               --【13】傳真號碼
+,EMBXNO                        VARCHAR(40)                               --【14】電子信箱號碼
+,STLOC                         VARCHAR(1)                                --【15】存放院區別
+,STFILC                        VARCHAR(2)                                --【16】存放檔區
+,CHTTRORS                      VARCHAR(1)                                --【17】病歷調出原因
+,ONWMK                         VARCHAR(4)                                --【18】在途註記
+,BFTRORS                       VARCHAR(1)                                --【19】前調出原因
+,ZIP                           VARCHAR(5)                                --【20】郵遞區號
+,COTEL                         VARCHAR(15)                               --【21】公司電話號碼
+)  tablespace  cgmpgst_table;
+
+Grant select, insert, update, delete on PRS.RPRSPDB to CGHPRS;
+--產生時間:2025/06/26 09:55:16
+--系統名稱:門診掛號系統
+--系統代號:CGHRMS
+--表格名稱:RRMSDOCTN(新醫師檔)
+
+create table RMS.RRMSDOCTN
+(LOC                           VARCHAR(1)                                --【01】院區
+,DRID                          VARCHAR(4)                                --【02】醫師代號
+,DRCNM                         VARCHAR(10)                               --【03】醫師中文姓名
+,ID                            VARCHAR(10)                               --【04】身分證字號
+,EFDAT                         TIMESTAMP                                 --【05】生效日期
+,CLODAT                        TIMESTAMP                                 --【06】截止日期
+,TXDAT                         TIMESTAMP                                 --【07】異動日期
+,TXEMP                         VARCHAR(4)                                --【08】異動人員
+,TRMID                         VARCHAR(4)                                --【09】機台代號
+,SPTUID                        VARCHAR(10)                               --【10】支援註記
+,ENM                           VARCHAR(40)                               --【11】英文姓名
+,BBC                           VARCHAR(10)                               --【12】呼叫器
+,EMAIL                         VARCHAR(40)                               --【13】電子郵件信箱
+,PHSNO                         VARCHAR(15)                               --【14】PHS號碼
+)  tablespace  cgmpgst_table;
+
+--【Add Primary Key】
+alter table RMS.RRMSDOCTN add  constraint
+   PK_RRMSDOCTN  primary key (LOC,DRID)
+   using index
+tablespace  cgmpgst_index;
+
+Grant select, insert, update, delete on RMS.RRMSDOCTN to CGHRMS;
+--產生時間:2025/06/26 09:55:16
+--系統名稱:資材(倉儲)供應系統
+--系統代號:CGHSUPY
+--表格名稱:RSUPADGN(處方集檔)
+
+create table SUPY.RSUPADGN
+(DGNO                          VARCHAR(8)                                --【01】藥品編號
+,DGNM                          VARCHAR(80)                               --【02】藥品名稱
+,DGMRCNM                       VARCHAR(80)                               --【03】藥品商品名一
+,UP1                           NUMERIC (11,2)                            --【04】單價一
+,UN1                           VARCHAR(2)                                --【05】單位一
+,UP2                           NUMERIC (11,2)                            --【06】單價二
+,UN2                           VARCHAR(2)                                --【07】單位二
+,DCMKTPE                       VARCHAR(1)                                --【08】停用註記台北
+,DCMKKEL                       VARCHAR(1)                                --【09】停用註記基隆
+,DCMKLNK                       VARCHAR(1)                                --【10】停用註記林口
+,DCMKSHK                       VARCHAR(1)                                --【11】停用註記高雄
+,ANBCTLMK                      VARCHAR(1)                                --【12】管制註記(抗生素)
+,MLOCNO                        VARCHAR(4)                                --【13】料位
+,SYRID                         VARCHAR(1)                                --【14】空針代號
+,RUT                           VARCHAR(4)                                --【15】使用途徑一
+,SPTKMD                        VARCHAR(2)                                --【16】特殊服用方法
+,USMK                          VARCHAR(1)                                --【17】使用註記
+,FRQ                           VARCHAR(4)                                --【18】使用頻率
+,PEMLAFML                      VARCHAR(2)                                --【19】飯前飯後
+,REUS                          VARCHAR(1)                                --【20】重複使用
+,TRDSG1                        NUMERIC (15,3)                            --【21】轉換劑量一
+,TRUN1                         VARCHAR(3)                                --【22】轉換單位一
+,TRDSG2                        NUMERIC (15,3)                            --【23】轉換劑量二
+,TRUN2                         VARCHAR(3)                                --【24】轉換單位二
+,PERUSUN                       VARCHAR(3)                                --【25】每次使用單位
+,PERUQTY                       VARCHAR(11)                               --【26】每次用量
+,TQTY                          NUMERIC (11,3)                            --【27】每日常用量
+,HIGHUQTY                      NUMERIC (11,3)                            --【28】每日極量
+,OPID                          VARCHAR(4)                                --【29】操作員代號
+,GFDAT                         TIMESTAMP                                 --【30】建檔日期
+,FNLTXDAT                      TIMESTAMP                                 --【31】最後異動日
+,DGMRCABR                      VARCHAR(40)                               --【32】藥品俗名
+,OTRDGNO1                      VARCHAR(8)                                --【33】替代藥品編號一
+,OTRDGNO2                      VARCHAR(8)                                --【34】替代藥品編號二
+,ORIENTATION                   VARCHAR(80)                               --【35】適應症
+,DCMKSPH                       VARCHAR(1)                                --【36】停用註記聖保祿
+,DCMKPHS                       VARCHAR(1)                                --【37】停用註記鳳山
+,CTLCLS                        VARCHAR(1)                                --【38】管制等級
+,DCMKCHY                       VARCHAR(1)                                --【39】停用註記嘉義
+,RUT2                          VARCHAR(4)                                --【40】使用途徑二
+,RUT3                          VARCHAR(4)                                --【41】使用途徑三
+,RAREDSSDGMK                   VARCHAR(1)                                --【42】罕見疾病藥品註記
+,DISPDGMK                      VARCHAR(1)                                --【43】調劑藥品註記
+,MK1                           VARCHAR(1)                                --【44】專案藥品註記
+,MK2                           VARCHAR(1)                                --【45】高警訊藥品註記
+,MK3                           VARCHAR(1)                                --【46】抗生素註記
+,MK4                           VARCHAR(1)                                --【47】抗微生物劑
+,MK5                           VARCHAR(1)                                --【48】停用註記護理之家
+,MK6                           VARCHAR(1)                                --【49】停用註記桃園分院
+,MK7                           VARCHAR(1)                                --【50】愛滋用藥註記
+,ABSITM                        VARCHAR(100)                              --【51】本品引進說明
+,DGMRCNMPAC                    VARCHAR(80)                               --【52】藥品商品名稱及包裝
+,RUT4                          VARCHAR(4)                                --【53】使用途徑四
+,RUT5                          VARCHAR(4)                                --【54】使用途徑五
+,RUT6                          VARCHAR(4)                                --【55】連處停用註記護理之家
+,RUT7                          VARCHAR(4)                                --【56】連處停用註記桃園
+,RUT8                          VARCHAR(4)                                --【57】連處停用註記情人湖
+,DGMRCNM2                      VARCHAR(80)                               --【58】藥品商品名二
+,MK8                           VARCHAR(1)                                --【59】懷孕藥_D類註記
+,MK9                           VARCHAR(1)                                --【60】懷孕藥_X類註記
+,MKA                           VARCHAR(1)                                --【61】新藥/臨時註記
+,MKB                           VARCHAR(1)                                --【62】制酸劑
+,MKC                           VARCHAR(1)                                --【63】類固醇
+,MKD                           VARCHAR(1)                                --【64】戒菸用藥
+,MKE                           VARCHAR(1)                                --【65】建議使用天數
+,MKF                           VARCHAR(1)                                --【66】停用註記情人湖
+,MKG                           VARCHAR(1)                                --【67】化療藥
+,PREDATE                       TIMESTAMP                                 --【68】預定送藥委會日期
+,RLEDATE                       TIMESTAMP                                 --【69】實際送藥委會日期
+,ATC_1                         VARCHAR(5)                                --【70】ATC_CODE_1
+,ATC_2                         VARCHAR(7)                                --【71】ATC_CODE_2
+,MKH                           VARCHAR(3)                                --【72】多種規格註記
+,MKI                           VARCHAR(3)                                --【73】極量週期
+,MKJ                           VARCHAR(3)                                --【74】注射劑(xm)/健保每日極量(tw)
+,MKK                           VARCHAR(3)                                --【75】抗菌藥(xm)/健保天數(tw)
+,MKL                           VARCHAR(3)                                --【76】基本藥物(xm)/群組碼(TW)
+,MKM                           VARCHAR(3)                                --【77】非優先(同一藥品不同廠牌)
+,MKN                           VARCHAR(3)                                --【78】多種劑型
+,MKO                           VARCHAR(3)                                --【79】多種廠牌
+,MKP                           VARCHAR(3)                                --【80】停用註記雲林
+,MKQ                           VARCHAR(3)                                --【81】TPN
+,MKR                           VARCHAR(3)                                --【82】影片編號
+,MKS                           VARCHAR(3)                                --【83】異代
+,MKT                           VARCHAR(3)                                --【84】連處停用註記台北
+,MKU                           VARCHAR(3)                                --【85】連處停用註記基隆
+,MKV                           VARCHAR(3)                                --【86】連處停用註記林口
+,MKW                           VARCHAR(3)                                --【87】連處停用註記高雄
+,MKX                           VARCHAR(3)                                --【88】連處停用註記雲林
+,MKY                           VARCHAR(3)                                --【89】連處停用註記鳳山
+,MKZ                           VARCHAR(3)                                --【90】連處停用註記嘉義
+,NOTE1                         VARCHAR(50)                               --【91】編號(同一藥品不同廠牌)
+,NOTE2                         VARCHAR(50)                               --【92】標籤藥品名
+,NOTE3                         VARCHAR(50)                               --【93】標籤規格
+,NOTE4                         VARCHAR(50)                               --【94】條碼
+,TRDSG3                        NUMERIC (15,3)                            --【95】轉換劑量三
+,TRUN3                         VARCHAR(3)                                --【96】轉換單位三
+,NEWRUT6                       VARCHAR(4)                                --【97】使用途徑6
+)  tablespace  cgmpgst_table;
+
+--【Add Primary Key】
+alter table SUPY.RSUPADGN add  constraint
+   PK_RSUPADGN  primary key (DGNO)
+   using index
+tablespace  cgmpgst_index;
+
+Grant select, insert, update, delete on SUPY.RSUPADGN to CGHSUPY;
+

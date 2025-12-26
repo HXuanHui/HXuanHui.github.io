@@ -1,0 +1,22 @@
+PROMPT CREATE OR REPLACE PACKAGE kwbsadm
+CREATE OR REPLACE PACKAGE kwbsadm AS        
+  /**
+   *   硋   bednosts 隤芣  
+   **/
+  FUNCTION Get_Bednosts_Desc(p_bednosts VARCHAR2) RETURN VARCHAR2;
+END;
+
+/
+
+PROMPT CREATE OR REPLACE PACKAGE BODY kwbsadm
+CREATE OR REPLACE PACKAGE BODY kwbsadm AS
+  FUNCTION Get_Bednosts_Desc(p_bednosts VARCHAR2) RETURN VARCHAR2 IS
+    v_desc VARCHAR2(400);
+  BEGIN
+    Select idnm into v_desc FROM radmstdsame Where it = 'A001' And id = p_bednosts;
+    RETURN v_desc;
+  EXCEPTION WHEN OTHERS THEN
+    return '';
+  END Get_Bednosts_Desc;
+END KWBSADM;
+/
