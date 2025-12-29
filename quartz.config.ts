@@ -8,7 +8,7 @@ import * as Plugin from "./quartz/plugins"
  */
 const config: QuartzConfig = {
   configuration: {
-    pageTitle: "🪴 我的數位花園", // 這是網頁左上角的標題
+    pageTitle: "H.XuanHui's Notes", // 這是網頁左上角的標題
     pageTitleSuffix: " | 知識庫",
     enableSPA: true,
     enablePopovers: true,
