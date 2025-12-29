@@ -42,7 +42,7 @@ pg_ctl -D /path/to/data -m immediate stop # 立即關閉（危險）
 
 當你使用 `systemctl stop postgresql` 時，systemctl 實際上是調用預先設定好的腳本，該腳本最終還是會執行類似 `pg_ctl stop` 的命令。所以 systemctl 可以說是 pg_ctl 的上層包裝。
 
-## 我認為需要補充說明的部分
+#我認為需要補充說明的部分
 
 從你的教材內容，我發現有個說法需要澄清：**"PostgreSQL Instance的啟動與停止只能使用pg_ctl，無法藉由其他工具"** 這個說法在 Linux 環境下並不完全正確。
 

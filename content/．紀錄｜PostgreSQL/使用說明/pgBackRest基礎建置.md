@@ -23,18 +23,13 @@ style: |-
 
 # 環境準備與前置檢查
 
-在安裝任何軟體之前，進行系統性的環境驗證是預防常見部署失敗、確保後續流程順暢無誤的關鍵步驟。這些「起飛前檢查」將協助您確認所有系統與 PostgreSQL 資料庫的先決條件均已滿足。
-
-
-----
-
 ### 系統環境確認 
 
 ``` bash
 # 查看發行版本詳細資訊
 cat /etc/os-release
 
-# 查看 CPU 架構 (x86_64 還是 aarch64)
+# 查看 CPU 架構 (x86_64 還是 arch64)
 uname -m
 ```
 ---
@@ -103,7 +98,6 @@ sudo chmod 750 /var/lib/pgbackrest
 
 ### 設定 pgbackrest.conf
 
-此設定檔是 pgBackRest 的大腦，它定義了備份儲存庫的位置、資料庫叢集的位置以及其他關鍵參數。
 
 **1. 編輯設定檔**
 開啟設定檔。
@@ -115,13 +109,13 @@ sudo vim /etc/pgbackrest/pgbackrest.conf
 
 **2. 修改pgbackrest.conf**
 根據 `ps -ef | grep postgres | grep -v grep` 結果，將路徑填入 `pg1-path` 。
-這裡我們將 Stanza (備份設定檔名) 取名為 `cgh_main` 。以下修改為最低需求，詳細配置參考[pgBackRest參數設定](pgBackRest參數設定.md)。
+將 Stanza (備份設定檔名) 取名為 `cg_test_prodcut` ，關於 Stanza 的命名，官方文件的確建議採用**具有描述性且能反映用途**的名稱，通常建議使用 `[專案代碼]_[環境]_[用途]` 的組合。以下修改為最低需求，詳細配置參考[pgBackRest參數設定](pgBackRest參數設定.md)。
 
 ```ini
 [global]
 # 指定備份倉庫路徑
 repo1-path=/var/lib/pgbackrest
-# 設定保留策略：保留最近 2 份全備份 (Lab 測試用，正式環境通常設 7-14)
+# 設定保留策略：保留最近 2 份全備份 (測試用，正式環境通常設 7-14)
 repo1-retention-full=2
 # 設定日誌級別
 log-level-console=info
@@ -129,10 +123,12 @@ log-level-file=detail
 # 啟用並行處理 (加速備份/還原)
 process-max=2
 
-[cgh_main]
+[cg_test_prodcut]
 # 資料庫真實路徑 (來自 ps -ef 結果)
 pg1-path=/var/lib/postgresql/16/main
 ```
+
+>[global用途](一定要設定global嗎？.md)
 
 ---
 
@@ -201,7 +197,7 @@ sudo -u postgres -i
 這會建立必要的目錄結構。
 
 ```bash
-pgbackrest --stanza=cgh_main stanza-create
+pgbackrest --stanza=cg_test_prodcut stanza-create
 ```
 
 ---
@@ -209,7 +205,7 @@ pgbackrest --stanza=cgh_main stanza-create
 這是一個自我檢測指令，它會測試「能否寫入備份區」以及「能否讀取資料庫」。
 
 ```bash
-pgbackrest --stanza=cgh_main check
+pgbackrest --stanza=cg_test_prodcut check
 ```
 
 當您在輸出結尾看到 `command end: completed successfully` 時，才代表您的基礎設定已成功完成。至此，一個基礎的備份系統已部署完成並通過驗證。

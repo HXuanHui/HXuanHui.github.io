@@ -65,6 +65,7 @@ psql postgresql://userName:password@localhost/mydatabase
 2. [怎麼在psql切換DB？](怎麼在psql切換DB？.md)
 3. [user可以連縣adb，也可以連線bdb，但是連入adb之後不可以＼c切換至bdb，是不是辦不到？](user可以連縣adb，也可以連線bdb，但是連入adb之後不可以＼c切換至bdb，是不是辦不到？.md)
 4. [PG可以跟ORCL一樣設置多PORT來達到附載平衡嗎？](PG可以跟ORCL一樣設置多PORT來達到附載平衡嗎？.md)
+5. [PostgreSQL網路設置的對比實作](PostgreSQL網路設置的對比實作.md)
 
 
 ---

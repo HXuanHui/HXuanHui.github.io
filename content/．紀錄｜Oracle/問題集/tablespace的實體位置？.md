@@ -1,4 +1,3 @@
-#ORACLE 
 
 ## 查詢tablespace實體位置的方法
 
@@ -53,7 +52,7 @@ ORDER BY t.tablespace_name;
 
 ---
 
-## 我認為需要補充說明的部分
+#我認為需要補充說明的部分
 
 ### 1. Oracle Managed Files (OMF) 概念不夠清楚
 
@@ -85,3 +84,4 @@ ORDER BY t.tablespace_name;
 
 這些查詢方法可以讓你完整了解tablespace的實體儲存位置和狀態。
 
+#ORACLE 

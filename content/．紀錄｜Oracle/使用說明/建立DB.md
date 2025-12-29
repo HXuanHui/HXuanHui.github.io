@@ -114,7 +114,7 @@ SELECT name FROM v$datafile ORDER BY 1;
 SELECT dbms_xdb_config.gethttpsport() FROM dual;
 ```
 
-## 我認為需要補充說明的部分：
+#我認為需要補充說明的部分：
 
 1. **初始化參數檔案的建立**：教材提到需要建立parameter file，但沒有詳細說明PFILE與SPFILE的區別和轉換過程。
     

@@ -27,7 +27,7 @@ pgbackrest --stanza=cgh_main --type=full backup
 
 在有了完整備份之後，就可以執行更節省空間與時間的備份類型。
 
-- **執行差異備份 (Differential Backup)** 此備份包含自上次完整備份以來的所有變更。
+- **執行差異備份 (Differential Backup)** 此備份包含自上次 **完整備份** 以來的所有變更。
  ```bash
 pgbackrest --stanza=cgh_main --type=diff backup
 ```
@@ -160,7 +160,7 @@ psql -c "SELECT * FROM patient_data;"
 # 此時應該會報錯：ERROR: relation "patient_data" does not exist
 ```
 
-其他的情境：[pgbackrest復原情境](pgbackrest的還原是可以指定一個隨便的時間復原嗎？.md)
+其他的情境：[更多pgbackrest復原情境](pgbackrest的還原是可以指定一個隨便的時間復原嗎？.md)
 
 
 ---
@@ -168,8 +168,7 @@ psql -c "SELECT * FROM patient_data;"
 
 **還原必須先停止資料庫服務。**
 
-#### **退出 postgres 使用者 (回到 cghadmin)**
-
+#### **退出 postgres 使用者**
 ```bash
 exit
 ```
@@ -181,17 +180,21 @@ sudo systemctl stop postgresql
 ```
 ---
 
-#### **執行還原 (指定回到災難發生前的時間)**
-還原到剛剛紀錄的時間再晚一點時候。更多還原參數說明，參考[pgBackRest參數設定](pgBackRest參數設定.md)
+#### **執行還原 **
+還原到災難發生前。更多還原參數說明，參考[更多pgBackRest參數設定](pgBackRest參數設定.md)
 
 ```bash
-# 請將下方的時間替換為您剛剛記下的時間再往後一點
+# 先確認還原狀態是否無誤
+sudo -u postgres pgbackrest --stanza=cgh_main --delta --type=time --target="2025-12-12 08:30:00" --dry-run restore
+
+# 執行還原
 sudo -u postgres pgbackrest --stanza=cgh_main --delta --type=time --target="2025-12-12 08:30:00" restore
 ```
 - **參數解析**:
-        - `--delta`: 這是最佳實踐，它能智慧地同步資料目錄，只還原變動或遺失的檔案，比完全清空後再還原更快也更安全。
-        - `--type=time`: 指定執行時間點復原。
-        - `--target`: 指定還原到的目標時間。
+	- `--dry-run`：確認你指定的 `--target` 時間點，在備份倉庫（Repo）中是否有對應的 Full/Diff/Incr 備份與 WAL 日誌可以對接。
+	- `--delta`: 這是最佳實踐，它能智慧地同步資料目錄，只還原變動或遺失的檔案，比完全清空後再還原更快也更安全。
+	- `--type=time`: 指定執行時間點復原。
+	- `--target`: 指定還原到的目標時間。
 
 ---
 

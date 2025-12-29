@@ -21,20 +21,45 @@ style: |-
   }
 ---
 
-
 ## 生產環境最佳實踐與強化設定
 
 基礎設定雖然功能完備，但生產環境對效能、安全性與自動化有著更高的要求。
+### 生產級設定檔範本
 
-### 快速啟動備份：start-fast
+```ini
+[global]
+# --- 效能優化 ---
+# 用於壓縮與傳輸的平行程序數量；建議設為 CPU 核心數的 25% 左右
+process-max=4
+# 使用 zst 壓縮以獲得更快的速度與良好的壓縮比
+compress-type=zst
+# 執行WAL歸檔時立即觸發檢查點以快速啟動備份
+start-fast=y
+# 將小檔案打包傳輸
+repo-bundle=y
 
-預設情況下，當您執行備份指令時，pgBackRest 會等待 PostgreSQL 下一次排程的「檢查點 (Checkpoint)」觸發後才開始備份。這個等待時間可能長達數分鐘。
+# --- 安全性強化 ---
+# 啟用 AES-256-CBC 加密
+repo1-cipher-type=aes-256-cbc
+# 使用 'openssl rand -base64 48' 產生的加密金鑰
+repo1-cipher-pass=zWaf6XtpjIVZC5444yXB+cgFDFl7MxGlgkZSaoPvTGirhPygu4jOKOXf9LO4vjfO
 
- - **設定建議**：`start-fast=y`
- - **作用**：強制 PostgreSQL 在備份指令下達時，立即執行一個檢查點。
- - **效益**：消除不必要的等待時間，讓備份排程能準時且迅速地啟動。
+# --- 儲存庫與保留策略 ---
+repo1-path=/var/lib/pgbackrest
+# 保留最近 7 份完整備份
+repo1-retention-full=7
+# 保留最近 4 份差異備份
+repo1-retention-diff=4
 
+# --- 日誌設定 ---
+log-level-console=info
+log-level-file=detail
+log-path=/var/log/pgbackrest
 
+[cgh_main]
+pg1-path=/var/lib/postgresql/17/main
+
+```
 
 ----
 ### 並行處理優化：process-max
@@ -55,6 +80,20 @@ style: |-
 - **設定建議**：`compress-type=zst`
 - **作用**：切換使用 Facebook 開發的 Zstandard (zstd) 演算法。
 - **效益**：相較於預設的 gz，zstd 在相同的壓縮比下能提供更快的壓縮與解壓縮速度，這意味著更短的備份窗口與更快的災難復原速度。
+
+---
+
+
+### 快速啟動備份：start-fast
+
+預設情況下，當您執行備份指令時，pgBackRest 會等待 PostgreSQL 下一次排程的「檢查點 (Checkpoint)」觸發後才開始備份。這個等待時間可能長達數分鐘。
+
+ - **設定建議**：`start-fast=y`
+ - **作用**：強制 PostgreSQL 在備份指令下達時，立即執行一個檢查點。
+ - **效益**：消除不必要的等待時間，讓備份排程能準時且迅速地啟動。
+
+
+
 ---
 
 ### 檔案打包傳輸：repo-bundle
@@ -109,7 +148,7 @@ PostgreSQL 資料庫目錄中包含成千上萬個小檔案（如 `pg_clog`, `pg
 
 
 ---
-### 管理備份保留策略
+### 管理備份保留策略：repo-retention
 
 為了有效管理儲存空間，避免備份無限制地增長，設定清晰的保留策略至關重要。
 
@@ -118,53 +157,6 @@ PostgreSQL 資料庫目錄中包含成千上萬個小檔案（如 `pg_clog`, `pg
 
 pgBackRest 的 `expire` 指令負責執行過期備份的清理工作。此指令預設會在每次成功的 `backup` 指令執行後自動運行，因此您通常無需手動干預。
 
-
----
-### 整合後的生產級設定檔範本
-
-以上說明的 `/etc/pgbackrest/pgbackrest.conf` 完整範本。
-
-```ini
-[global]
-# --- 效能優化 ---
-# 用於壓縮與傳輸的平行程序數量；建議設為 CPU 核心數的 25% 左右
-process-max=4
-# 使用 zst 壓縮以獲得更快的速度與良好的壓縮比
-compress-type=zst
-# 立即觸發檢查點以快速啟動備份
-start-fast=y
-# 將小檔案打包傳輸
-repo-bundle=y
-
-# --- 安全性強化 ---
-# 啟用 AES-256-CBC 加密
-repo1-cipher-type=aes-256-cbc
-# 使用 'openssl rand -base64 48' 產生的加密金鑰
-repo1-cipher-pass=zWaf6XtpjIVZC5444yXB+cgFDFl7MxGlgkZSaoPvTGirhPygu4jOKOXf9LO4vjfO
-
-```
-
----
-### 整合後的生產級設定檔範本(cont'd)
-
-```
-
-# --- 儲存庫與保留策略 ---
-repo1-path=/var/lib/pgbackrest
-# 保留最近 7 份完整備份
-repo1-retention-full=7
-# 保留最近 4 份差異備份
-repo1-retention-diff=4
-
-# --- 日誌設定 ---
-log-level-console=info
-log-level-file=detail
-log-path=/var/log/pgbackrest
-
-[cgh_main]
-pg1-path=/var/lib/postgresql/17/main
-
-```
 
 ---
 ## 還原指令解析與策略
@@ -189,58 +181,60 @@ pg1-path=/var/lib/postgresql/17/main
 
 ---
 ### 還原的目標類型
-這個參數決定了 **「資料庫要還原成什麼狀態」** 或 **「由什麼基準點停止」**。
 
-• **當前設定 (--type=time  )** ：
+這個參數決定了 **「資料庫要還原成什麼狀態」** 或 **「由什麼基準點停止」**。
 
-    ◦ **行為**：時間點還原 (PITR)。配合 `--target` 指定的時間，重放 WAL 日誌直到該時刻。
-
-    ◦ **適用情境**：人為錯誤（如誤刪 Table、錯誤更新資料），需要回到錯誤發生前的那一刻。
-
-• **可替換的選項 (Alternatives)**：
-
-    ◦ **--type=default** **(或不寫)**：
-
-        ▪ **行為**：還原到備份後的 **最新狀態**（End of WAL）。它會把歸檔中所有的 WAL 全部重放完畢。
-
-        ▪ **適用情境**：硬體故障導致主機掛掉，需要用備份救回所有能救的資料。
-
-    ◦ **--type=immediate**：
-
-        ▪ **行為**：還原到「資料庫一致性（Consistency）」達成的最早時刻就立刻停止 。
-
-        ▪ **適用情境**：緊急搶修，只想確認資料庫能開機，不在乎遺失備份後產生的新資料。
-
-    ◦ **--type=standby**：
-
-        ▪ **行為**：不停止重放，而是將資料庫設定為 **「唯讀待命模式 (Hot Standby)」**。它會自動在 `postgresql.auto.conf` 寫入 `standby_mode` 相關設定（視 PG 版本而定），讓這台機器變成從庫。
-
-        ▪ **適用情境**：建立 Replication 從機、測試環境搭建。
-
-    ◦ **--type=xid** **/** **--type=lsn** **/** **--type=name**：
-
-        ▪ **行為**：分別依據「交易 ID」、「Log Sequence Number」或「還原點名稱 (Restore Point)」來還原。
-
-        ▪ **適用情境**：DBA 進行精密除錯，知道具體哪個 Transaction 出問題時使用。
-
-
+- **當前設定 (`--type=time`)**
+    
+    - **行為**：時間點還原 (PITR)。配合 `--target` 指定的時間，重放 WAL 日誌直到該時刻。
+        
+    - **適用情境**：人為錯誤（如誤刪 Table、錯誤更新資料），需要回到錯誤發生前的那一刻。
+        
+- **可替換的選項 (Alternatives)**
+    
+    - **`--type=default` (或不寫)**
+        
+        - **行為**：還原到備份後的 **最新狀態**（End of WAL）。它會把歸檔中所有的 WAL 全部重放完畢。
+            
+        - **適用情境**：硬體故障導致主機掛掉，需要用備份救回所有能救的資料。
+            
+    - **`--type=immediate`**
+        
+        - **行為**：還原到「資料庫一致性（Consistency）」達成的最早時刻就立刻停止。
+            
+        - **適用情境**：緊急搶修，只想確認資料庫能開機，不在乎遺失備份後產生的新資料。
+            
+    - **`--type=standby`**
+        
+        - **行為**：不停止重放，而是將資料庫設定為 **「唯讀待命模式 (Hot Standby)」**。它會自動在 `postgresql.auto.conf` 寫入 `standby_mode` 相關設定，讓這台機器變成從庫。
+            
+        - **適用情境**：建立 Replication 從機、測試環境搭建。
+            
+    - **`--type=xid / --type=lsn / --type=name`**
+        
+        - **行為**：分別依據「交易 ID」、「Log Sequence Number」或「還原點名稱 (Restore Point)」來還原。
+            
+        - **適用情境**：DBA 進行精密除錯，知道具體哪個 Transaction 出問題時使用。
+            
 
 ---
+
 ### 還原的目標值
 
-這個參數是 `--type` 的具體數值。
+這個參數是 `--type` 的具體數值。
 
-• **當前設定 (--target="2025-12-12 08:30:00")**：
-
-    ◦ **行為**：告訴 pgBackRest 停止重放 WAL 的精確時間。
-
-    ◦ **注意**：時間格式建議包含時區（如 timestamp with time zone），否則可能會因 UTC/Local time 差異導致還原點錯誤 。
-
-• **衝突/限制**：
-
-    ◦ 如果 `--type` 是 `default` (不指定) 或 `standby`，通常不需要 `--target`（除非您想建立一個「延遲 standby」）。
-
-    ◦ `--target` 的格式必須與 `--type` 對應（例如 `type=xid` 時 target 必須是交易 ID 數字）。
+- **當前設定 (`--target="2025-12-12 08:30:00"`)**
+    
+    - **行為**：告訴 pgBackRest 停止重放 WAL 的精確時間。
+        
+    - **注意**：時間格式建議包含時區（如 timestamp with time zone），否則可能會因 UTC/Local time 差異導致還原點錯誤。
+        
+- **衝突 / 限制**
+    
+    - 如果 `--type` 是 `default` (不指定) 或 `standby`，通常不需要 `--target`（除非您想建立一個「延遲 standby」）。
+        
+    - `--target` 的格式必須與 `--type` 對應（例如 `type=xid` 時 target 必須是交易 ID 數字）。
+        
 
 ---
 
@@ -248,34 +242,29 @@ pg1-path=/var/lib/postgresql/17/main
 
 為了讓操作更精確，以下參數經常與上述指令搭配使用：
 
-• **--target-action**：
-
-    ◦ **說明**：決定還原到達目標時間點後要做什麼動作。
-
-    ◦ **選項**：
-
-        ▪ `promote` (預設值)：還原完成後，直接切換為主機（Primary），允許寫入。
-
-        ▪ `pause`：還原到目標點後 **暫停**，維持唯讀狀態。這讓您可以登入檢查：「資料救回來了嗎？」。如果沒救回來，可以調整目標時間再繼續重放；如果確認無誤，再手動執行 `pg_wal_replay_resume()` 提升為主機。
-
-        ▪ `shutdown`：還原後直接關機。
-
-    ◦ **建議**：如果不確定時間點是否抓得準，建議加上 `--target-action=pause`。
-
-
------
-
-• **--set**：
-
-    ◦ **說明**：指定要使用哪一個備份集（Backup Set）開始還原 。
-
-    ◦ **情境**：pgBackRest 通常會自動選擇最適合該時間點的備份集。但在某些複雜情況下（例如有多條 Timeline 或多次還原紀錄），您可能需要手動指定備份標籤（Backup Label，可透過 `info` 指令查看）來強制使用特定備份。
-
-
-------
-
-• **--db-include** **/** **--db-exclude**：
-
-    ◦ **說明**：只還原特定的資料庫。
-
-    ◦ **情境**：如果您的大資料庫有 5TB，但只要救回其中一個 50GB 的 `test_db`，加上 `--db-include=test_db` 可以節省大量的時間與空間。其他未被選中的資料庫會變成空殼（Sparse files）。
+- **`--target-action`**
+    
+    - **說明**：決定還原到達目標時間點後要做什麼動作。
+        
+    - **選項**：
+        
+        - `promote` (預設值)：還原完成後，直接切換為主機 (Primary)，允許寫入。
+            
+        - `pause`：還原到目標點後 **暫停**，維持唯讀狀態。方便檢查資料是否救回。若確認無誤，再手動執行 `pg_wal_replay_resume()` 提升為主機。
+            
+        - `shutdown`：還原後直接關機。
+            
+    - **建議**：如果不確定時間點是否抓得準，建議加上 `--target-action=pause`。
+        
+- **`--set`**
+    
+    - **說明**：指定要使用哪一個備份集 (Backup Set) 開始還原。
+        
+    - **情境**：pgBackRest 通常會自動選擇最適合的備份集。但在複雜情況下（如多條 Timeline），可能需要手動指定備份標籤 (Backup Label) 強制使用特定備份。
+        
+- **`--db-include / --db-exclude`**
+    
+    - **說明**：只還原特定的資料庫。
+        
+    - **情境**：若大資料庫有 5TB 但只要救其中一個 50GB 的 `test_db`，使用 `--db-include` 可節省大量時間與空間。未選中的資料庫會變成空殼。
+        

@@ -1,7 +1,6 @@
-#postgreSQL 
 ## 基本概念差異
 
-根據教材：「**pg_dump：用於備份單一資料庫**」「**pg_restore：從 pg_dump 創建的備份文件中恢復資料**」
+「**pg_dump：用於備份單一資料庫**」「**pg_restore：從 pg_dump 創建的備份文件中恢復資料**」
 
 |工具|作用|方向|
 |---|---|---|
@@ -42,7 +41,7 @@ pg_restore [選項] -d 目標資料庫 備份檔案
 pg_restore -U postgres -d company_db backup.dump
 ```
 
-## 關鍵差異：檔案格式處理
+## 差異：檔案格式處理
 
 ### 情況1：純文字SQL檔案 (.sql)
 
@@ -98,8 +97,6 @@ pg_restore -U postgres -d new_company_db -t employees backup.dump
 
 ## 與Oracle的類比
 
-如果您熟悉Oracle：
-
 - `pg_dump` ≈ `expdp`（匯出）
 - `pg_restore` ≈ `impdp`（匯入二進位格式）
 - `psql -f` ≈ `@script.sql`（執行SQL腳本）
@@ -112,4 +109,6 @@ pg_restore -U postgres -d new_company_db -t employees backup.dump
 - **pg_restore** 只能處理二進位格式
 - **純文字SQL檔必須用 psql 執行，不能用 pg_restore**
 
-您現在理解為什麼剛才的 `roles.sql` 要用 `psql -f` 而不是 `pg_restore` 了嗎？
+
+
+#postgreSQL 

@@ -1,11 +1,11 @@
-#postgreSQL 
-### 情境 1：要還原的時間點「還在本地 `pg_wal` 中」
+
+### 情境 1：要還原的時間點資料「還在本地 `pg_wal` 中」
 
 這通常發生在：您剛誤刪資料，且該交易非常新，`pg_wal` 段還沒被切換（switch）或尚未被 pgBackRest 成功歸檔到遠端。
 
 - **還原邏輯：** 結合 **pgBackRest 倉庫的數據** + **本地存活的 WAL 檔案**。
     
-- **操作關鍵：**
+- **操作：**
     
     1. **保護現場：** 立刻停止資料庫，將 `/var/lib/pgsql/data/pg_wal/` 目錄整個複製出來（例如存到 `/tmp/wal_rescue`）。
         
@@ -26,7 +26,7 @@
 
 - **還原邏輯：** 依靠 **Full Backup** 作為地基，再由 pgBackRest **自動拉取 Archive WAL** 進行重播。
     
-- **操作關鍵：** 
+- **操作：** 
     ```
     pgbackrest --stanza=your_db restore --type=time \
     --target="2025-12-23 11:00:00" --delta
@@ -89,7 +89,5 @@
 | **僅有備份檔**     | Full Backup                               | 僅限備份當下    | 遺失備份後的所有資料    |
 | **增量備份**      | **Incremental** + Archive WAL             | 高 (秒級)    | 速度最快，風險同 PITR |
 
-最後一個小提醒：
 
-在執行還原前，強烈建議加上 --dry-run 參數，讓 pgBackRest 告訴您它打算怎麼還原、會用到哪些備份檔，確認無誤後再正式執行。
-
+#postgreSQL 
