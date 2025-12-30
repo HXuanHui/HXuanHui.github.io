@@ -1,4 +1,4 @@
-#postgreSQL 
+
 ## PostgreSQL表空間創建時可調整的參數
 
 在PostgreSQL中創建表空間時，可以調整的主要參數包括：
@@ -67,4 +67,4 @@ WITH (seq_page_cost=1.1, random_page_cost=2.0);
 2. **儲存管理**：PostgreSQL依賴檔案系統管理儲存空間，Oracle有自己的空間管理機制
 3. **擴展性**：PostgreSQL表空間會自動使用目錄下的可用空間，不需要像Oracle一樣預先定義大小
 
-您認為這個對應說明清楚嗎？有沒有特定的參數需要我進一步解釋？
+#postgreSQL 

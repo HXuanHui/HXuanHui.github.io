@@ -1,9 +1,7 @@
 ---
 title: 🔴Oracle目錄
 ---
-
-# Table of contents
-
+上完19c教育課程之後整理的筆記還有一些遺忘的基礎知識拾遺：）
 
 * [1.建立DB](建立DB.md)
 * [2.Instance啟動階段](Instance啟動階段.md)

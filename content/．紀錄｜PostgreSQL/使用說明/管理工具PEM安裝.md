@@ -20,10 +20,13 @@ style: |-
   img{display: block; margin:0 auto;object-fit: contain;
   }
 ---
-
-
 # PEM安裝
-黃暄惠 2024/11
+PEM是類似於Oracle的Toad，是 EDB (EnterpriseDB)公司的專有軟體，它不遵循 PostgreSQL 的開源授權，而是採用 EDB 的商業授權。
+
+PEM本身沒有額外獨立賣授權，而是綁在 EDB 的訂閱裡計費；只要被 PEM 監控的 PostgreSQL/EPAS 節點都有有效的 EDB 訂閱，就可以合法使用 PEM。
+
+因此，在 production 環境中，無論是社群版 PostgreSQL 還是 EPAS，只要要被 PEM 監控，就必須購買並涵蓋在對應的 EDB Standard 或 Enterprise 訂閱之下，否則不算合法使用。
+
 
 ---
 

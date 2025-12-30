@@ -1,4 +1,4 @@
-#postgreSQL 
+
 在 psql 中切換資料庫，有幾種方法：
 
 ## 主要方法
@@ -62,4 +62,7 @@
 
 
 # 複習與問題
-1.[user可以連縣adb，也可以連線bdb，但是連入adb之後不可以＼c切換至bdb，是不是辦不到？](user可以連縣adb，也可以連線bdb，但是連入adb之後不可以＼c切換至bdb，是不是辦不到？.md)
+1.[user的跨db連線限制？](user的跨db連線限制？.md)
+
+
+#postgreSQL 

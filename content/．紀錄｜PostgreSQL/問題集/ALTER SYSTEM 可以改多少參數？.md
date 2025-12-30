@@ -1,4 +1,4 @@
-#postgreSQL 
+
 PostgreSQL的`ALTER SYSTEM`只能修改**postgresql.conf**中的參數，不能修改其他設定檔案。
 
 ## ALTER SYSTEM的範圍
@@ -111,3 +111,5 @@ include_dir = 'conf.d'
 # 複習與問題
 1. [[WAL相關參數]]
 2. [創建psql表空間的時候可以調整哪些參數？](創建psql表空間的時候可以調整哪些參數？.md)
+
+#postgreSQL 

@@ -1,4 +1,4 @@
-#postgreSQL 
+
 **必須手動建立目錄：**
 
 1. **安全考量** - PostgreSQL不會自動建立目錄，避免誤建立錯誤路徑
@@ -66,4 +66,5 @@ sudo chmod -R 700 /data/postgres/
     - PostgreSQL要求目錄必須存在且為空
     - 如果目錄內有檔案會建立失敗
 
-這個設計讓PostgreSQL的tablespace管理更加明確和安全，雖然需要額外步驟，但能避免很多潛在的檔案系統問題。
+
+#postgreSQL 

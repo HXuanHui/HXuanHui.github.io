@@ -1,5 +1,3 @@
-#ORACLE #postgreSQL 
-
 ## Oracle 19c 的架構
 
 從教材可以看到，Oracle 的連線架構是這樣的：
@@ -80,3 +78,5 @@ PostgreSQL 的 **instance（在 PG 中稱為 cluster）在 initdb 時就需要�
 |連線方式|Client → Listener → Instance|Client → Instance|
 |多資料庫支援|透過 PDB/Service name|透過不同 instance/port|
 |Port 設定時機|Listener 設定檔|initdb 或 postgresql.conf|
+
+#ORACLE #postgreSQL 

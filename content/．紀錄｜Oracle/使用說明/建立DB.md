@@ -114,7 +114,7 @@ SELECT name FROM v$datafile ORDER BY 1;
 SELECT dbms_xdb_config.gethttpsport() FROM dual;
 ```
 
-#我認為需要補充說明的部分：
+#我認為需要補充說明的部分
 
 1. **初始化參數檔案的建立**：教材提到需要建立parameter file，但沒有詳細說明PFILE與SPFILE的區別和轉換過程。
     
@@ -127,5 +127,5 @@ SELECT dbms_xdb_config.gethttpsport() FROM dual;
 # 提問與複習
 1. [[如果使用dbca的話是不是在此之前要先跑 catproc.sql才會有這個工具]]
 2. [[安裝之後是不是要跑腳本去建立view跟其他管理工具？]]
-3. [NLS_CHARACTERSET、NLS_NCHAR_CHARACTERSET的不同，並且我記得只有unicode還是什麼才可以兼容其他的字符集，其他的好像不能互相兼容？](NLS_CHARACTERSET、NLS_NCHAR_CHARACTERSET的不同，並且我記得只有unicode還是什麼才可以兼容其他的字符集，其他的好像不能互相兼容？.md)
+3. [NLS_CHARACTERSET、NLS_NCHAR_CHARACTERSET的不同？](NLS_CHARACTERSET、NLS_NCHAR_CHARACTERSET的不同？.md)
 4. [什麼是OMF？](什麼是OMF？.md)

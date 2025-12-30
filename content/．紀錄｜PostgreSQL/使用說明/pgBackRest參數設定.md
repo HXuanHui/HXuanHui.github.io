@@ -20,8 +20,7 @@ style: |-
   img{display: block; margin:0 auto;object-fit: contain;
   }
 ---
-
-## 生產環境最佳實踐與強化設定
+# 生產環境最佳實踐與強化設定
 
 基礎設定雖然功能完備，但生產環境對效能、安全性與自動化有著更高的要求。
 ### 生產級設定檔範本
@@ -268,3 +267,7 @@ pgBackRest 的 `expire` 指令負責執行過期備份的清理工作。此指�
         
     - **情境**：若大資料庫有 5TB 但只要救其中一個 50GB 的 `test_db`，使用 `--db-include` 可節省大量時間與空間。未選中的資料庫會變成空殼。
         
+
+
+### reference
+1. [官方指令參數](https://pgbackrest.org/command.html)

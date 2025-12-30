@@ -1,9 +1,8 @@
 ---
 title: 🐘PostgreSQL目錄
 ---
-
-# Table of contents
-
+依照Oracle的學習roadmap嘗試了解PG的架構以及操作方法及紀錄。
+還有很多認知淺薄的部分～
 ## PostgreSQL
 * [1. PostgreSQL介紹](PostgreSQL介紹.md)
 * [2. PostgreSQL安裝](PostgreSQL安裝.md)

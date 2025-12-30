@@ -44,7 +44,7 @@ execute dbms_audit_mgmt.set_audit_trail_location(dbms_audit_mgmt.audit_trail_aud
 - 為用戶指定專用的default tablespace（如USERS）
 - 避免用戶對象意外創建在SYSTEM tablespace中
 
-## 我認為教材不夠清楚的部分
+#我認為教材不夠清楚的部分
 
 1. **性能影響**：教材沒有詳細說明SYSTEM tablespace空間不足時對整體資料庫性能的具體影響
     

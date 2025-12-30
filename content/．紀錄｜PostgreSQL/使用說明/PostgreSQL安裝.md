@@ -23,7 +23,7 @@ header: PostgreSQL安裝
 1. 使用zip板下載
    [EDB: Open-Source, Enterprise Postgres Database Management](https://www.enterprisedb.com/download-postgresql-binaries)
 1. 解壓縮在你想要放的地方
-2. Instance設定詳見「4_PostgreSQL連線設定」
+2. Instance設定詳見「[PostgreSQL連線設定](PostgreSQL連線設定.md)」
 
 ---
 ## 在Windows使用EDB安裝

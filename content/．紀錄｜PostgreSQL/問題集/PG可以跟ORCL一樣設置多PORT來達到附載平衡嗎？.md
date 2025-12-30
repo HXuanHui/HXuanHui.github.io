@@ -1,4 +1,4 @@
-#postgreSQL 
+
 PostgreSQL**可以**設置多個埠號，但運作方式和Oracle有本質差異。讓我詳細說明：
 
 ## PostgreSQL多埠號設置
@@ -260,4 +260,6 @@ EOF
 |**高可用性**|❌ 單點故障|✅ 可配置多副本|
 |**維護複雜度**|低|中等|
 
-**結論：**PostgreSQL無法像Oracle那樣簡單地用多埠號實現負載平衡，但透過PgBouncer + HAProxy的組合，可以達到更好的效能和可用性。Oracle的多Listener方案簡單但不提供真正的高可用性，而PostgreSQL的方案雖然複雜一些，但更符合現代分散式架構的需求。
+結論：PostgreSQL無法像Oracle那樣簡單地用多埠號實現負載平衡，但透過PgBouncer + HAProxy的組合，可以達到更好的效能和可用性。Oracle的多Listener方案簡單但不提供真正的高可用性，而PostgreSQL的方案雖然複雜一些，但更符合現代分散式架構的需求。
+
+#postgreSQL 

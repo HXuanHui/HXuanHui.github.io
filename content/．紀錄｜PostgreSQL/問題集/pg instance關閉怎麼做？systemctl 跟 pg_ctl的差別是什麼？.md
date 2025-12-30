@@ -22,7 +22,7 @@ pg_ctl -D /path/to/data -m immediate stop # 立即關閉（危險）
 
 ## systemctl 與 pg_ctl 的差別
 
-從你的教材來看，主要差別在於使用場景和控制層級：
+主要差別在於使用場景和控制層級：
 
 ### pg_ctl
 
@@ -55,5 +55,3 @@ pg_ctl -D /path/to/data -m immediate stop # 立即關閉（危險）
 但在 Windows 環境或手動安裝的 PostgreSQL 中，確實主要依賴 pg_ctl。
 
 **不清楚的原因**：教材可能是基於特定環境（如 Windows 或手動安裝）撰寫，沒有涵蓋 Linux 系統服務的管理方式。作為 DBA，了解不同環境下的管理方式是很重要的。
-
-你目前是在什麼環境下學習 PostgreSQL？這會影響你應該重點掌握哪種管理方式。

@@ -6,13 +6,6 @@ paginate: true
 header: Postgres使用者管理
 ---
 
-
-
-# Postgres使用者管理
-黃暄惠 2024/11
-
----
-
 ## 創建Role
 ![](．紀錄｜PostgreSQL/picture/createrole.png)
 

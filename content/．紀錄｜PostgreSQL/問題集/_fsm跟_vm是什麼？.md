@@ -1,4 +1,4 @@
-#postgreSQL 
+
 ## PostgreSQL的FSM和VM檔案
 
 ### 1. **FSM檔案 (Free Space Map)**
@@ -164,4 +164,5 @@ FROM pg_stat_user_tables;
 - 追蹤頁面可見性，優化VACUUM
 - PostgreSQL獨有的MVCC優化機制
 
-這些檔案是PostgreSQL實現高效能空間管理和MVCC的關鍵組件，雖然增加了檔案數量，但大幅提升了資料庫的運行效率。
+
+#postgreSQL 

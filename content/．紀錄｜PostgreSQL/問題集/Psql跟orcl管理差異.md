@@ -271,5 +271,5 @@ PostgreSQL的"檔案系統層級管理"意思是：
 
 # 複習與問題
 1. [_fsm跟_vm是什麼？](_fsm跟_vm是什麼？.md)
-2. [psql怎麼調整block size？](psql怎麼調整block%20size？.md)
+2. [pg怎麼調整block size？](pg怎麼調整block%20size？.md)
 3. [怎麼建立tablespace？](怎麼建立tablespace？.md)

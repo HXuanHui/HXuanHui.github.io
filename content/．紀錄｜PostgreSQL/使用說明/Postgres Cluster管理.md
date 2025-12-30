@@ -6,13 +6,6 @@ paginate: true
 header: Postgres Instance管理
 ---
 
-
-
-
-# Postgres Cluster管理
-黃暄惠 2024/11
-
----
 ## 叢集的啟動與管理
 
 💡PostgreSQL的啟動過程相對簡單，只要**啟動叢集**就等於**開啟資料庫**。 當你啟動PostgreSQL時，叢集會直接進入運行狀態，並且會自動加載所有必要的數據結構和配置，而不需要經歷像Oracle那樣的多個狀態階段。
@@ -149,9 +142,9 @@ pg_ctl start
 
 ---
 # 複習與問題
-1. [psql怎麼調整block size？](psql怎麼調整block%20size？.md)
+1. [pg怎麼調整block size？](pg怎麼調整block%20size？.md)
 2. [ALTER SYSTEM 可以改多少參數？](ALTER%20SYSTEM%20可以改多少參數？.md)
-3. [psql instance關閉怎麼做？systemctl 跟 pg_ctl的差別是什麼？](psql%20instance關閉怎麼做？systemctl%20跟%20pg_ctl的差別是什麼？.md)
+3. [pg instance關閉怎麼做？systemctl 跟 pg_ctl的差別是什麼？](pg%20instance關閉怎麼做？systemctl%20跟%20pg_ctl的差別是什麼？.md)
 
 ---
 

@@ -1,5 +1,3 @@
-#postgreSQL 
-
 ## PostgreSQL目錄數字的含義
 
 ### 1. **這些數字是OID (Object Identifier)**
@@ -132,3 +130,5 @@ $ ls -la /var/lib/postgresql/14/main/base/16384/
 - 同一個資料庫所有檔案預設都在同一個OID目錄下
 - 只有指定tablespace時才會例外
 - 這種設計比Oracle簡單，但彈性較少
+
+#postgreSQL 

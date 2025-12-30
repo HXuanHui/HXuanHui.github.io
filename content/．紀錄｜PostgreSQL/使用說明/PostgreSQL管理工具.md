@@ -149,5 +149,5 @@ pgAdmin 的最新版本為 pgAdmin 4
 2. [透過 pgAdmin 操作 PostgreSQL 資料庫](https://learningsky.io/use-postgresql-databases-with-the-pgadmin/)
 3. [pgAdmin介面操作](https://ithelp.ithome.com.tw/articles/10247750)
 ### 相關文件
-1. PEM安裝
+1. [管理工具PEM安裝](管理工具PEM安裝.md)
 
