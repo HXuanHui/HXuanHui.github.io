@@ -21,12 +21,6 @@ style: |-
   img{display: block; margin:0 auto;object-fit: contain;
   }
 ---
-
-# PostgreSQL介紹
-黃暄惠 2024/11
-
----
-
 ## 主要特點
 
 - **開源與免費**

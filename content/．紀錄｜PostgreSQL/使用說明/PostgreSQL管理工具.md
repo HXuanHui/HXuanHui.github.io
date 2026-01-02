@@ -5,12 +5,6 @@ class:
 paginate: true
 header: PostgreSQL管理工具
 ---
-
-
-# PostgreSQL管理工具
-黃暄惠 2024/11
-
----
 ## PostgreSQL管理工具
  - pg_
  - psql

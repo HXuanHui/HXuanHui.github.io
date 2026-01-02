@@ -1,3 +1,188 @@
 @use "./base.scss";
 
-// put your custom CSS here!
+// ===== 隱藏側邊欄滾動條但保持滾動功能 =====
+.left, .right {
+    // 隱藏滾動條 (適用於 Webkit 瀏覽器: Chrome, Safari, Edge)
+    &::-webkit-scrollbar {
+      display: none;
+    }
+    
+    // 隱藏滾動條 (適用於 Firefox)
+    scrollbar-width: none;
+    
+    // 確保仍可滾動
+    overflow-y: auto;
+    -ms-overflow-style: none; // IE 和 Edge
+  }
+  
+  // ===== 左側邊欄樣式優化 =====
+  .left {
+    // 減小整體字體大小
+    font-size: 0.85rem;
+    
+    // 調整行高讓文字更緊湊
+    line-height: 1.4;
+    
+    // 標題縮小
+    h1, h2, h3, h4, h5, h6 {
+      font-size: 0.9em;
+      margin-top: 0.8em;
+      margin-bottom: 0.5em;
+    }
+    
+    // Explorer (文件樹) 優化
+    .explorer {
+      font-size: 0.82rem;
+      
+      // 文件/資料夾項目間距
+      .folder-outer, .file-outer {
+        padding: 0.15rem 0;
+      }
+      
+      // 縮排距離
+      .folder-container {
+        padding-left: 1rem;
+      }
+      
+      // 資料夾標題
+      .folder-title {
+        font-weight: 500;
+      }
+      
+      // 文件連結
+      a {
+        padding: 0.2rem 0.3rem;
+        border-radius: 3px;
+        transition: background-color 0.2s ease;
+        
+        &:hover {
+          background-color: var(--highlight);
+        }
+      }
+    }
+    
+    // Search 搜尋框
+    .search {
+      input {
+        font-size: 0.85rem;
+        padding: 0.4rem 0.8rem;
+      }
+    }
+    
+    // Page Title
+    .page-title {
+      font-size: 1.1rem;
+      margin-bottom: 0.8rem;
+    }
+  }
+  
+  // ===== 右側邊欄樣式優化 =====
+  .right {
+    // 減小整體字體大小
+    font-size: 0.82rem;
+    
+    // Graph (關係圖)
+    .graph {
+      // 圖表容器
+      .graph-outer {
+        border-radius: 6px;
+        overflow: hidden;
+      }
+    }
+    
+    // Table of Contents (目錄)
+    .toc {
+      font-size: 0.8rem;
+      line-height: 1.5;
+      
+      // 目錄標題
+      .toc-title {
+        font-size: 0.85rem;
+        font-weight: 600;
+        margin-bottom: 0.6rem;
+        color: var(--dark);
+      }
+      
+      // 目錄列表
+      ul {
+        margin: 0;
+        padding-left: 0;
+        list-style: none;
+        
+        li {
+          margin: 0.25rem 0;
+          
+          // 巢狀層級縮排
+          ul {
+            padding-left: 0.8rem;
+            margin-top: 0.2rem;
+          }
+        }
+      }
+      
+      // 目錄連結
+      a {
+        color: var(--gray);
+        text-decoration: none;
+        display: block;
+        padding: 0.15rem 0.4rem;
+        border-radius: 3px;
+        transition: all 0.2s ease;
+        
+        &:hover {
+          color: var(--secondary);
+          background-color: var(--highlight);
+        }
+        
+        // 當前活動項目
+        &.active {
+          color: var(--secondary);
+          font-weight: 500;
+        }
+      }
+    }
+    
+    // Backlinks (反向連結)
+    .backlinks {
+      font-size: 0.8rem;
+      
+      a {
+        font-size: 0.82rem;
+      }
+    }
+  }
+  
+  // ===== 通用側邊欄優化 =====
+  .left, .right {
+    // 增加內部間距，讓內容不要太靠邊
+    padding: 1rem 0.8rem;
+    
+    // 子元素間距
+    > * {
+      margin-bottom: 1.2rem;
+      
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+  
+  // ===== 響應式調整 =====
+  @media (max-width: 1200px) {
+    .left, .right {
+      font-size: 0.8rem;
+    }
+  }
+  
+  // ===== 提升整體清爽度 =====
+  // 減少不必要的邊框和陰影
+  .explorer, .toc, .graph {
+    border: none;
+    box-shadow: none;
+  }
+  
+  // 優化間距
+  .explorer .folder-outer::before,
+  .explorer .file-outer::before {
+    opacity: 0.3; // 讓連接線更淡
+  }
