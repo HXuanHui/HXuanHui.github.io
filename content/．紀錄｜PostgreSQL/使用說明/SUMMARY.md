@@ -1,5 +1,6 @@
 ---
 title: 🐘PostgreSQL目錄
+maturity: signpost
 ---
 依照Oracle的學習roadmap嘗試了解PG的架構以及操作方法及紀錄。
 
@@ -24,6 +25,3 @@ title: 🐘PostgreSQL目錄
 * [1. pgBackRest基礎建置](pgBackRest基礎建置.md)
 * [2. pgBackRest基礎還原操作](pgBackRest基礎還原操作.md)
 * [3. pgBackRest參數設定](pgBackRest參數設定.md)
-
-
-#index

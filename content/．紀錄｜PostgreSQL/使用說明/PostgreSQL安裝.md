@@ -1,15 +1,13 @@
 ---
 theme:
   - default
-class: 
+class:
 paginate: true
 header: PostgreSQL安裝
+title:
+maturity: Withered
 ---
 
-# PostgreSQL安裝
-黃暄惠 2024/11
-
----
 ## PostgreSQL安裝
  - Linux x86-64
  - Linux x86-32

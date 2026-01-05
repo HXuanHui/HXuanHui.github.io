@@ -23,6 +23,9 @@ import Breadcrumbs from "./Breadcrumbs"
 import Comments from "./Comments"
 import Flex from "./Flex"
 import ConditionalRender from "./ConditionalRender"
+import MaturityLevel from "./MaturityLevel"
+import DecorativeImage from "./DecorativeImage"
+import Forest from "./Forest"
 
 export {
   ArticleTitle,
@@ -50,4 +53,7 @@ export {
   Comments,
   Flex,
   ConditionalRender,
+  MaturityLevel,
+  DecorativeImage,
+  Forest,
 }

@@ -13,25 +13,9 @@ const observer = new IntersectionObserver((entries) => {
   }
 })
 
-function toggleToc(this: HTMLElement) {
-  this.classList.toggle("collapsed")
-  this.setAttribute(
-    "aria-expanded",
-    this.getAttribute("aria-expanded") === "true" ? "false" : "true",
-  )
-  const content = this.nextElementSibling as HTMLElement | undefined
-  if (!content) return
-  content.classList.toggle("collapsed")
-}
-
 function setupToc() {
-  for (const toc of document.getElementsByClassName("toc")) {
-    const button = toc.querySelector(".toc-header")
-    const content = toc.querySelector(".toc-content")
-    if (!button || !content) return
-    button.addEventListener("click", toggleToc)
-    window.addCleanup(() => button.removeEventListener("click", toggleToc))
-  }
+  // TOC 摺疊功能已移除，現在始終展開
+  // 只保留高亮功能
 }
 
 document.addEventListener("nav", () => {

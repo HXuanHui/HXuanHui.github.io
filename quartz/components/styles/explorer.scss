@@ -90,12 +90,26 @@
   }
 }
 
-button.mobile-explorer,
-button.desktop-explorer {
+button.mobile-explorer {
   background-color: transparent;
   border: none;
   text-align: left;
   cursor: pointer;
+  padding: 0;
+  color: var(--dark);
+  display: flex;
+  align-items: center;
+
+  & h2 {
+    font-size: 1rem;
+    display: inline-block;
+    margin: 0;
+  }
+}
+
+.title-button.desktop-explorer {
+  background-color: transparent;
+  text-align: left;
   padding: 0;
   color: var(--dark);
   display: flex;

@@ -1,16 +1,13 @@
 ---
 theme:
   - default
-class: 
+class:
 paginate: true
 header: PostgreSQL連線設定
+title:
+maturity: Sapling
 ---
 
-
-# PostgreSQL連線設定
-黃暄惠 2024/11
-
----
 ## 工具與文件
 
 - pg_hba.conf
@@ -57,7 +54,7 @@ psql postgresql://userName:password@localhost/mydatabase
 
 ---
 ## 結語
-到這裡連接上資料庫就可以做簡單的資料庫操作了，前提是要先用pg_ctl啟動資料庫，詳情請見5_PostgreSQL Instance管理。
+到這裡連接上資料庫就可以做簡單的資料庫操作了，前提是要先用pg_ctl啟動資料庫，詳情請見[Postgres Cluster管理](Postgres%20Cluster管理.md)管理。
 
 ---
 # 複習與問題

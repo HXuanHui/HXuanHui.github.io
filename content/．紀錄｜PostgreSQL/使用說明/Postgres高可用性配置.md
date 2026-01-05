@@ -1,15 +1,10 @@
 ---
 theme:
   - default
-class: 
+class:
 paginate: true
 header: Postgres高可用性配置
----
-
-
-# Postgres高可用性配置
-黃暄惠 2024/11
-
+maturity: Sapling
 ---
 
 ## 方案一工具

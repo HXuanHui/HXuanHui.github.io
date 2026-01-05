@@ -19,6 +19,8 @@ style: |-
   }
   img{display: block; margin:0 auto;object-fit: contain;
   }
+title:
+maturity: Withered
 ---
 # PEM安裝
 PEM是類似於Oracle的Toad，是 EDB (EnterpriseDB)公司的專有軟體，它不遵循 PostgreSQL 的開源授權，而是採用 EDB 的商業授權。

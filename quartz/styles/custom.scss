@@ -1,7 +1,12 @@
 @use "./base.scss";
+@use "./variables.scss" as *;
+@import "maturity-system";
 
-// ===== 隱藏側邊欄滾動條但保持滾動功能 =====
-.left, .right {
+// ===== 左右導航整體獨立滾動 =====
+// 讓整個側邊欄可以獨立滾動，而不是內部組件各自滾動
+// 只在桌面設備上應用（移動設備保持原有行為）
+@media all and ($desktop) {
+  .sidebar.left, .sidebar.right {
     // 隱藏滾動條 (適用於 Webkit 瀏覽器: Chrome, Safari, Edge)
     &::-webkit-scrollbar {
       display: none;
@@ -10,13 +15,67 @@
     // 隱藏滾動條 (適用於 Firefox)
     scrollbar-width: none;
     
-    // 確保仍可滾動
+    // 確保整個側邊欄可以滾動
     overflow-y: auto;
+    overflow-x: hidden;
     -ms-overflow-style: none; // IE 和 Edge
+    
+    // 確保高度固定，這樣才能滾動
+    height: 100vh;
+    max-height: 100vh;
+    
+    // 移除內部組件的滾動限制，讓它們自然流動
+    .explorer {
+      overflow-y: visible !important;
+      overflow-x: visible !important;
+      flex: 0 0 auto; // 讓 explorer 根據內容自動調整高度
+      
+      .explorer-content {
+        overflow-y: visible !important;
+        overflow-x: visible !important;
+        max-height: none !important;
+        height: auto !important;
+      }
+    }
+    
+    .toc {
+      overflow-y: visible !important;
+      overflow-x: visible !important;
+      flex: 0 0 auto; // 讓 toc 根據內容自動調整高度
+      
+      ul.toc-content.overflow {
+        overflow-y: visible !important;
+        max-height: none !important;
+        height: auto !important;
+      }
+    }
+    
+    // 其他組件也移除滾動限制
+    .graph, .search, .backlinks {
+      overflow-y: visible !important;
+      overflow-x: visible !important;
+      flex: 0 0 auto;
+    }
+  }
+}
+
+// 為了向後兼容，保留 .left 和 .right 的樣式（如果沒有 .sidebar 類）
+.left:not(.sidebar), .right:not(.sidebar) {
+  // 隱藏滾動條 (適用於 Webkit 瀏覽器: Chrome, Safari, Edge)
+  &::-webkit-scrollbar {
+    display: none;
   }
   
-  // ===== 左側邊欄樣式優化 =====
-  .left {
+  // 隱藏滾動條 (適用於 Firefox)
+  scrollbar-width: none;
+  
+  // 確保仍可滾動
+  overflow-y: auto;
+  -ms-overflow-style: none; // IE 和 Edge
+}
+
+// ===== 左側邊欄樣式優化 =====
+.left {
     // 減小整體字體大小
     font-size: 0.85rem;
     

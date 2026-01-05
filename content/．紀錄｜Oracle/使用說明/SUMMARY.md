@@ -1,5 +1,6 @@
 ---
 title: 🔴Oracle目錄
+maturity: signpost
 ---
 上完19c教育課程之後整理的筆記還有一些遺忘的基礎知識拾遺：）
 
@@ -11,6 +12,3 @@ title: 🔴Oracle目錄
 * [Tables](Tables.md)
 * [Tablespace](Tablespace.md)
 * 
-
-
-#index

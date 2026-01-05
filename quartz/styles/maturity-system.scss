@@ -1,0 +1,269 @@
+/* 成熟度系統樣式 - 整合到 Explorer 和文件列表中 */
+/* 放置位置: quartz/styles/maturity-system.scss */
+
+/* ==================== 成熟度徽章樣式 ==================== */
+
+.maturity-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.3rem 0.7rem;
+  background-color: var(--highlight);
+  border-radius: 6px;
+  font-size: 0.85rem;
+  margin-bottom: 1rem;
+  border: 1px solid var(--lightgray);
+  transition: all 0.2s ease;
+  cursor: help;
+}
+
+.maturity-badge:hover {
+  background-color: var(--lightgray);
+  border-color: var(--gray);
+  transform: translateY(-1px);
+}
+
+.maturity-icon {
+  font-size: 1.1rem;
+  line-height: 1;
+  filter: grayscale(0);
+}
+
+.maturity-label {
+  font-weight: 500;
+  color: var(--darkgray);
+  font-family: var(--bodyFont);
+  font-size: 0.82rem;
+}
+
+/* ==================== Explorer 中的成熟度圖標 ==================== */
+
+/* 在文件名前添加圖標 */
+.explorer .file-item::before,
+.explorer a[data-maturity]::before {
+  content: attr(data-maturity-icon);
+  margin-right: 0.4rem;
+  font-size: 0.9rem;
+  opacity: 0.8;
+  transition: opacity 0.2s ease;
+}
+
+.explorer .file-item:hover::before,
+.explorer a[data-maturity]:hover::before {
+  opacity: 1;
+}
+
+/* 根據成熟度等級設定圖標 */
+.explorer a[data-maturity="1"]::before,
+.explorer a[data-maturity="seedling"]::before {
+  content: "🌱";
+}
+
+.explorer a[data-maturity="2"]::before,
+.explorer a[data-maturity="sapling"]::before {
+  content: "🌿";
+}
+
+.explorer a[data-maturity="3"]::before,
+.explorer a[data-maturity="tree"]::before {
+  content: "🌳";
+}
+
+.explorer a[data-maturity="withered"]::before {
+  content: "🍂";
+}
+
+.explorer a[data-maturity="stone"]::before {
+  content: "💎";
+}
+
+.explorer a[data-maturity="signpost"]::before {
+  content: "🪧";
+}
+
+.explorer a[data-maturity="chest"]::before {
+  content: "🗃️";
+}
+
+/* ==================== 成熟度統計面板 ==================== */
+
+.maturity-stats {
+  background-color: var(--light);
+  border: 1px solid var(--lightgray);
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.maturity-stats-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--dark);
+  margin-bottom: 0.8rem;
+}
+
+.maturity-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 0.6rem;
+}
+
+.maturity-stat-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem;
+  background-color: var(--highlight);
+  border-radius: 6px;
+  font-size: 0.85rem;
+  transition: all 0.2s ease;
+}
+
+.maturity-stat-item:hover {
+  background-color: var(--lightgray);
+  transform: translateX(2px);
+}
+
+.maturity-stat-icon {
+  font-size: 1.2rem;
+}
+
+.maturity-stat-label {
+  color: var(--gray);
+  font-size: 0.75rem;
+}
+
+.maturity-stat-count {
+  color: var(--darkgray);
+  font-weight: 600;
+  margin-left: auto;
+}
+
+/* ==================== 響應式設計 ==================== */
+
+@media (max-width: 768px) {
+  .maturity-badge {
+    font-size: 0.8rem;
+    padding: 0.25rem 0.6rem;
+  }
+  
+  .maturity-stats-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ==================== 暗色模式 ==================== */
+
+.darkmode .maturity-badge {
+  background-color: var(--highlight);
+  border-color: var(--lightgray);
+}
+
+.darkmode .maturity-label {
+  color: var(--dark);
+}
+
+.darkmode .maturity-stats {
+  background-color: var(--light);
+  border-color: var(--lightgray);
+}
+
+.darkmode .maturity-stats-title {
+  color: var(--dark);
+}
+
+.darkmode .maturity-stat-item {
+  background-color: var(--highlight);
+}
+
+.darkmode .maturity-stat-item:hover {
+  background-color: var(--lightgray);
+}
+
+.darkmode .maturity-stat-label {
+  color: var(--gray);
+}
+
+.darkmode .maturity-stat-count {
+  color: var(--dark);
+}
+
+/* ==================== 文章內容中的成熟度提示 ==================== */
+
+.content-maturity-notice {
+  background-color: var(--highlight);
+  border-left: 4px solid var(--secondary);
+  padding: 1rem;
+  margin: 1.5rem 0;
+  border-radius: 4px;
+  font-size: 0.9rem;
+}
+
+.content-maturity-notice.withered {
+  border-left-color: #b8860b;
+  background-color: rgba(184, 134, 11, 0.1);
+}
+
+.content-maturity-notice-title {
+  font-weight: 600;
+  color: var(--dark);
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.content-maturity-notice-text {
+  color: var(--darkgray);
+  line-height: 1.5;
+}
+
+/* ==================== 頁面標題旁的成熟度圖標 ==================== */
+
+.page-title-with-maturity {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+}
+
+.page-title-with-maturity h1 {
+  margin: 0;
+}
+
+/* ==================== 列表視圖中的成熟度過濾器 ==================== */
+
+.maturity-filter {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.5rem;
+}
+
+.maturity-filter-btn {
+  padding: 0.4rem 0.8rem;
+  background-color: var(--light);
+  border: 1px solid var(--lightgray);
+  border-radius: 6px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.maturity-filter-btn:hover {
+  background-color: var(--lightgray);
+  border-color: var(--gray);
+}
+
+.maturity-filter-btn.active {
+  background-color: var(--secondary);
+  color: white;
+  border-color: var(--secondary);
+}
+
+.maturity-filter-btn .icon {
+  font-size: 1rem;
+}

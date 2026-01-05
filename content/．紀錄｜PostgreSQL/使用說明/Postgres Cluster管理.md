@@ -4,6 +4,7 @@ theme:
 class: []
 paginate: true
 header: Postgres Instance管理
+maturity: Tree
 ---
 
 ## 叢集的啟動與管理

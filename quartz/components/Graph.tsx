@@ -13,12 +13,14 @@ export interface D3Config {
   repelForce: number
   centerForce: number
   linkDistance: number
+  linkStrength?: number
   fontSize: number
   opacityScale: number
   removeTags: string[]
   showTags: boolean
   focusOnHover?: boolean
   enableRadial?: boolean
+  initialZoom?: number
 }
 
 interface GraphOptions {
@@ -35,12 +37,14 @@ const defaultOptions: GraphOptions = {
     repelForce: 0.5,
     centerForce: 0.3,
     linkDistance: 30,
+    linkStrength: 1,
     fontSize: 0.6,
     opacityScale: 1,
     showTags: true,
     removeTags: [],
     focusOnHover: false,
     enableRadial: false,
+    initialZoom: 1,
   },
   globalGraph: {
     drag: true,
@@ -50,12 +54,14 @@ const defaultOptions: GraphOptions = {
     repelForce: 0.5,
     centerForce: 0.2,
     linkDistance: 30,
+    linkStrength: 1,
     fontSize: 0.6,
     opacityScale: 1,
     showTags: true,
     removeTags: [],
     focusOnHover: true,
     enableRadial: true,
+    initialZoom: 1,
   },
 }
 

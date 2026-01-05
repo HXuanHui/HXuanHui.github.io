@@ -81,12 +81,14 @@ async function renderGraph(graph: HTMLElement, fullSlug: FullSlug) {
     repelForce,
     centerForce,
     linkDistance,
+    linkStrength = 1,
     fontSize,
     opacityScale,
     removeTags,
     showTags,
     focusOnHover,
     enableRadial,
+    initialZoom = 1,
   } = JSON.parse(graph.dataset["cfg"]!) as D3Config
 
   const data: Map<SimpleSlug, ContentDetails> = new Map(
@@ -168,7 +170,7 @@ async function renderGraph(graph: HTMLElement, fullSlug: FullSlug) {
   const simulation: Simulation<NodeData, LinkData> = forceSimulation<NodeData>(graphData.nodes)
     .force("charge", forceManyBody().strength(-100 * repelForce))
     .force("center", forceCenter().strength(centerForce))
-    .force("link", forceLink(graphData.links).distance(linkDistance))
+    .force("link", forceLink(graphData.links).distance(linkDistance).strength(linkStrength))
     .force("collide", forceCollide<NodeData>((n) => nodeRadius(n)).iterations(3))
 
   const radius = (Math.min(width, height) / 2) * 0.8
@@ -209,7 +211,7 @@ async function renderGraph(graph: HTMLElement, fullSlug: FullSlug) {
     const numLinks = graphData.links.filter(
       (l) => l.source.id === d.id || l.target.id === d.id,
     ).length
-    return 2 + Math.sqrt(numLinks)
+    return 3 + Math.sqrt(numLinks) * 1.2  // 增大節點大小，讓初始狀態更清晰可見
   }
 
   let hoveredNodeId: string | null = null
@@ -497,30 +499,48 @@ async function renderGraph(graph: HTMLElement, fullSlug: FullSlug) {
   }
 
   if (enableZoom) {
-    select<HTMLCanvasElement, NodeData>(app.canvas).call(
-      zoom<HTMLCanvasElement, NodeData>()
-        .extent([
-          [0, 0],
-          [width, height],
-        ])
-        .scaleExtent([0.25, 4])
-        .on("zoom", ({ transform }) => {
-          currentTransform = transform
-          stage.scale.set(transform.k, transform.k)
-          stage.position.set(transform.x, transform.y)
+    const zoomBehavior = zoom<HTMLCanvasElement, NodeData>()
+      .extent([
+        [0, 0],
+        [width, height],
+      ])
+      .scaleExtent([0.25, 4])
+      .on("zoom", ({ transform }) => {
+        currentTransform = transform
+        stage.scale.set(transform.k, transform.k)
+        stage.position.set(transform.x, transform.y)
 
-          // zoom adjusts opacity of labels too
-          const scale = transform.k * opacityScale
-          let scaleOpacity = Math.max((scale - 1) / 3.75, 0)
-          const activeNodes = nodeRenderData.filter((n) => n.active).flatMap((n) => n.label)
+        // zoom adjusts opacity of labels too
+        const scale = transform.k * opacityScale
+        let scaleOpacity = Math.max((scale - 1) / 3.75, 0)
+        const activeNodes = nodeRenderData.filter((n) => n.active).flatMap((n) => n.label)
 
-          for (const label of labelsContainer.children) {
-            if (!activeNodes.includes(label)) {
-              label.alpha = scaleOpacity
-            }
+        for (const label of labelsContainer.children) {
+          if (!activeNodes.includes(label)) {
+            label.alpha = scaleOpacity
           }
-        }),
-    )
+        }
+      })
+    
+    // 設定初始 zoom
+    if (initialZoom !== 1) {
+      currentTransform = zoomIdentity.scale(initialZoom)
+      stage.scale.set(initialZoom, initialZoom)
+      
+      // 初始狀態標籤 100% 不透明度（完全可見）
+      for (const label of labelsContainer.children) {
+        label.alpha = 1.0
+      }
+    } else {
+      // 即使沒有初始 zoom，也顯示標籤（100% 可見）
+      for (const label of labelsContainer.children) {
+        label.alpha = 1.0
+      }
+    }
+    
+    select<HTMLCanvasElement, NodeData>(app.canvas)
+      .call(zoomBehavior)
+      .call(zoomBehavior.transform, currentTransform)
   }
 
   let stopAnimation = false

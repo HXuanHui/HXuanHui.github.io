@@ -1,9 +1,11 @@
 ---
 theme:
   - default
-class: 
+class:
 paginate: true
 header: PostgreSQL管理工具
+title:
+maturity: Tree
 ---
 ## PostgreSQL管理工具
  - pg_
