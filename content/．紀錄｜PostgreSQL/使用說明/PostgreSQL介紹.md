@@ -21,7 +21,7 @@ style: |-
   img{display: block; margin:0 auto;object-fit: contain;
   }
 title:
-maturity:Tree
+maturity: Tree
 ---
 ## 主要特點
 
