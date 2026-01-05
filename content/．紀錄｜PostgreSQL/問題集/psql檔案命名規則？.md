@@ -1,3 +1,9 @@
+---
+title: psql檔案命名規則？
+draft: false
+maturity: stone
+---
+
 ## PostgreSQL目錄數字的含義
 
 ### 1. **這些數字是OID (Object Identifier)**

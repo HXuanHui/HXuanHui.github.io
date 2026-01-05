@@ -1,4 +1,10 @@
 
+---
+title: 怎麼建立tablespace？
+draft: false
+maturity: stone
+---
+
 **必須手動建立目錄：**
 
 1. **安全考量** - PostgreSQL不會自動建立目錄，避免誤建立錯誤路徑

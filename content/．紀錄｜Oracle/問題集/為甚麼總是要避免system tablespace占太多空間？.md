@@ -1,3 +1,9 @@
+---
+title: 為甚麼總是要避免system tablespace占太多空間？
+draft: false
+maturity: stone
+---
+
 #ORACLE 
 
 根據你的教材，我來解釋為什麼要避免SYSTEM tablespace占太多空間的重要原因：

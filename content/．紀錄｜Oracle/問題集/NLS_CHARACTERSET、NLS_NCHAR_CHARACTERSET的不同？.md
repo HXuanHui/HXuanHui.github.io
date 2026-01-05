@@ -1,3 +1,9 @@
+---
+title: NLS_CHARACTERSET、NLS_NCHAR_CHARACTERSET的不同？
+draft: false
+maturity: stone
+---
+
 #ORACLE 
 ## 兩者的基本差異
 

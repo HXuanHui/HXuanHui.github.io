@@ -1,3 +1,9 @@
+---
+title: parameter file可以在open的時候修改，但是因為nomount就會讀取了，所以必須重啟可以使用starup force，對嗎？
+draft: false
+maturity: stone
+---
+
 #ORACLE 
 ## **Parameter 修改的核心概念**
 

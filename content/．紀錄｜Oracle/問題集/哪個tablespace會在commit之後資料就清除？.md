@@ -1,3 +1,9 @@
+---
+title: 哪個tablespace會在commit之後資料就清除？
+draft: false
+maturity: stone
+---
+
 #ORACLE 
 ## **會在COMMIT後立即清除的資料結構**
 

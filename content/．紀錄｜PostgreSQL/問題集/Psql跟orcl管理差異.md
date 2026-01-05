@@ -1,3 +1,9 @@
+---
+title: Psql跟orcl管理差異
+draft: false
+maturity: stone
+---
+
 #ORACLE #postgreSQL 
 ## PostgreSQL依賴檔案系統的管理方式
 

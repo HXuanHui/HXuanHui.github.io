@@ -1,4 +1,10 @@
 
+---
+title: ALTER SYSTEM 可以改多少參數？
+draft: false
+maturity: stone
+---
+
 PostgreSQL的`ALTER SYSTEM`只能修改**postgresql.conf**中的參數，不能修改其他設定檔案。
 
 ## ALTER SYSTEM的範圍

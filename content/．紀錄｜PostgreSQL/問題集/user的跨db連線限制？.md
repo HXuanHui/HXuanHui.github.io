@@ -1,3 +1,9 @@
+---
+title: user的跨db連線限制？
+draft: false
+maturity: stone
+---
+
 「想要達到像oracle 19c pdb連線管制的效果 **使用者可以獨立連線到 `adb` 和 `bdb`，但一旦連線到其中一個資料庫（例如 `adb`），就不能在同一個 `psql` session 中使用 `\c` 命令切換到另一個資料庫 (`bdb`)。**」這個條件，在 PostgreSQL 的原生權限系統設計下，**是辦不到的**。讓我來解釋一下原因。
 
 

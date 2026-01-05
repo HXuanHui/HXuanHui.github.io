@@ -1,3 +1,9 @@
+---
+title: 如果沒有設置 undo_retention 的話 commit之後 undo的資料就會被清空了是嗎？
+draft: false
+maturity: stone
+---
+
 #ORACLE 
 
 **不是的！** 即使沒有設置`undo_retention`參數，commit之後undo資料也不會立即被清空。

@@ -1,3 +1,9 @@
+---
+title: sqlnet.ora跟cman.ora的區別
+draft: false
+maturity: stone
+---
+
 在 Oracle 資料庫的網路架構中，`sqlnet.ora` 和 `cman.ora` 分別扮演不同的角色。簡單來說，`sqlnet.ora` 是通用的「網路行為規則」，而 `cman.ora` 則是專門給「連線管理器（Proxy 服務）」使用的設定檔。
 
 以下是它們的詳細區別：

@@ -1,4 +1,10 @@
 
+---
+title: PG可以跟ORCL一樣設置多PORT來達到附載平衡嗎？
+draft: false
+maturity: stone
+---
+
 PostgreSQL**可以**設置多個埠號，但運作方式和Oracle有本質差異。讓我詳細說明：
 
 ## PostgreSQL多埠號設置

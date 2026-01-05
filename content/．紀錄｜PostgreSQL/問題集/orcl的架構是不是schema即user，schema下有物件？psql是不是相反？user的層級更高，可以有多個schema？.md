@@ -1,3 +1,9 @@
+---
+title: orcl的架構是不是schema即user，schema下有物件？psql是不是相反？user的層級更高，可以有多個schema？
+draft: false
+maturity: stone
+---
+
 #postgreSQL #ORACLE
 ## Oracle架構（根據您的教材）
 

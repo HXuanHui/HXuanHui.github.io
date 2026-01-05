@@ -1,3 +1,9 @@
+---
+title: dispatcher跟cman的關係
+draft: false
+maturity: stone
+---
+
 Dispatcher 與 CMAN（Connection Manager）都與「連線管理」和「資源優化」有關，但它們運作的**位置**與**目的**完全不同。
 
 簡單來說：**Dispatcher 是「內勤」，負責資料庫內部的效率；CMAN 是「外勤」，負責進出大門的交通引導與安全檢查。**

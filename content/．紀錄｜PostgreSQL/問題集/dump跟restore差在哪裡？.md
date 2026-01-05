@@ -1,3 +1,9 @@
+---
+title: dump跟restore差在哪裡？
+draft: false
+maturity: stone
+---
+
 ## 基本概念差異
 
 「**pg_dump：用於備份單一資料庫**」「**pg_restore：從 pg_dump 創建的備份文件中恢復資料**」

@@ -2,7 +2,7 @@
 title: 🐘PostgreSQL目錄
 maturity: signpost
 ---
-依照Oracle的學習roadmap嘗試了解PG的架構以及操作方法及紀錄。
+依照Oracle的學習roadmap嘗試了解PG的架構、操作方法及紀錄。
 
 還有很多認知淺薄的部分～
 ## PostgreSQL

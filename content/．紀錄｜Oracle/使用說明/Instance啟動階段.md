@@ -1,3 +1,13 @@
+---
+
+title:
+
+draft: false
+
+maturity: tree
+
+---
+
 ### **1. NOMOUNT 階段**
 
 - Oracle軟體定位參數檔案（SPFILE或PFILE）

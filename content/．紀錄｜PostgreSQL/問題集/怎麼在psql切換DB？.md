@@ -1,4 +1,10 @@
 
+---
+title: 怎麼在psql切換DB？
+draft: false
+maturity: stone
+---
+
 在 psql 中切換資料庫，有幾種方法：
 
 ## 主要方法

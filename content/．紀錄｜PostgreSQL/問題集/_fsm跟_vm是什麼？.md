@@ -1,3 +1,8 @@
+---
+title: _fsm跟_vm是什麼？
+draft: false
+maturity: stone
+---
 
 ## PostgreSQL的FSM和VM檔案
 

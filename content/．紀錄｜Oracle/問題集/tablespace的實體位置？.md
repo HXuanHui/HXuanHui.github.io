@@ -1,4 +1,10 @@
 
+---
+title: tablespace的實體位置？
+draft: false
+maturity: stone
+---
+
 ## 查詢tablespace實體位置的方法
 
 ### 1. 查詢資料檔案位置（最重要）

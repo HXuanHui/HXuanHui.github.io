@@ -1,3 +1,9 @@
+---
+title: PG是怎麼綁port的？跟ORCL的差異是什麼？
+draft: false
+maturity: stone
+---
+
 ## Oracle 19c 的架構
 
 從教材可以看到，Oracle 的連線架構是這樣的：

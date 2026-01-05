@@ -1,3 +1,9 @@
+---
+title: truncate, drop, delete的差別
+draft: false
+maturity: stone
+---
+
 #ORACLE 
 ### 1. **TRUNCATE TABLE**
 

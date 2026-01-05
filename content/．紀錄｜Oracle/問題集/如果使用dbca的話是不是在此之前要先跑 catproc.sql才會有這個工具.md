@@ -1,3 +1,9 @@
+---
+title: 如果使用dbca的話是不是在此之前要先跑 catproc.sql才會有這個工具
+draft: false
+maturity: stone
+---
+
 #ORACLE 
 **不需要先跑sqlproc才能使用DBCA。**
 

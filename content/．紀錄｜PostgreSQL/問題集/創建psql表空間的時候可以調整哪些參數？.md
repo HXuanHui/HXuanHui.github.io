@@ -1,4 +1,10 @@
 
+---
+title: 創建psql表空間的時候可以調整哪些參數？
+draft: false
+maturity: stone
+---
+
 ## PostgreSQL表空間創建時可調整的參數
 
 在PostgreSQL中創建表空間時，可以調整的主要參數包括：

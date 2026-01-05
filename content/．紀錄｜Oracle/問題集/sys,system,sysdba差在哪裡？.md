@@ -1,3 +1,9 @@
+---
+title: sys,system,sysdba差在哪裡？
+draft: false
+maturity: stone
+---
+
 #ORACLE 
 Oracle 裡的 **SYS**、**SYSTEM** 使用者，以及 **SYSDBA** 權限，差異如下：
 

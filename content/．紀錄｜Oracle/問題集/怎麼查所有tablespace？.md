@@ -1,3 +1,9 @@
+---
+title: 怎麼查所有tablespace？
+draft: false
+maturity: stone
+---
+
 #ORACLE 
 教材中提到了幾種查詢tablespace的方式：
 

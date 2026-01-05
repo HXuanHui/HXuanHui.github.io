@@ -1,3 +1,9 @@
+---
+title: psql的資料分布？
+draft: false
+maturity: stone
+---
+
 #postgreSQL 
 ## PostgreSQL在Ubuntu中的資料存放位置
 

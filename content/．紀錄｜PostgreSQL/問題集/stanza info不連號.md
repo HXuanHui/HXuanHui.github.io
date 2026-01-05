@@ -1,3 +1,9 @@
+---
+title: stanza info不連號
+draft: false
+maturity: stone
+---
+
 ```
 stanza: cg_test_product
     status: ok

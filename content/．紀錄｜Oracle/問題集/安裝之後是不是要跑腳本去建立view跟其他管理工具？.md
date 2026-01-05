@@ -1,3 +1,9 @@
+---
+title: 安裝之後是不是要跑腳本去建立view跟其他管理工具？
+draft: false
+maturity: stone
+---
+
 #ORACLE 
 ## 需要執行的腳本
 

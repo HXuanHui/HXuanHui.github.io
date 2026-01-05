@@ -1,3 +1,9 @@
+---
+title: 一定要設定global嗎？
+draft: false
+maturity: stone
+---
+
 簡單來說：**技術上不是「絕對」必要，但實務上「強烈建議」要有。**
 
 在 `pgbackrest.conf` 中，`[global]` 區塊的作用是定義**所有 Stanza 共用的預設參數**。如果沒有 `[global]`，你的設定檔會變得非常冗長且難以維護。

@@ -1,5 +1,11 @@
 
 
+---
+title: PostgreSQL網路設置的對比實作
+draft: false
+maturity: stone
+---
+
 ### 基本連線設定與Oracle的差異
 
 **PostgreSQL的設定方式：**

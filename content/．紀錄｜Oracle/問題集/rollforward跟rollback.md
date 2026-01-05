@@ -1,3 +1,9 @@
+---
+title: rollforward跟rollback
+draft: false
+maturity: stone
+---
+
 #ORACLE 
 ## **Rollforward（前滾/重做）**
 

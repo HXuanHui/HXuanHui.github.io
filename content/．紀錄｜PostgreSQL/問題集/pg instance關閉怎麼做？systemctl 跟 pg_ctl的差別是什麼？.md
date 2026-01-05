@@ -1,3 +1,9 @@
+---
+title: pg instance關閉怎麼做？systemctl 跟 pg_ctl的差別是什麼？
+draft: false
+maturity: stone
+---
+
 #postgreSQL
 
 ### 使用 pg_ctl 關閉

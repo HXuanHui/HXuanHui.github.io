@@ -1,3 +1,9 @@
+---
+title: pg怎麼調整block size？
+draft: false
+maturity: stone
+---
+
 #postgreSQL 
 ## PostgreSQL Block Size 調整的正確方法
 

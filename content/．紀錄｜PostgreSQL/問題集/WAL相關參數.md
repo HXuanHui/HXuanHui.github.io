@@ -1,3 +1,9 @@
+---
+title: WAL相關參數
+draft: false
+maturity: stone
+---
+
 #postgreSQL 
 ## WAL 內容與級別
 
