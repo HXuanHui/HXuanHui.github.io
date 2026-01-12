@@ -20,6 +20,9 @@ export interface D3Config {
   showTags: boolean
   focusOnHover?: boolean
   enableRadial?: boolean
+  showDepthSlider?: boolean
+  minDepth?: number
+  maxDepth?: number
   initialZoom?: number
 }
 
@@ -36,14 +39,16 @@ const defaultOptions: GraphOptions = {
     scale: 1.1,
     repelForce: 0.5,
     centerForce: 0.3,
-    linkDistance: 30,
-    linkStrength: 1,
+    linkDistance: 100,
     fontSize: 0.6,
     opacityScale: 1,
-    showTags: true,
+    showTags: false,
     removeTags: [],
     focusOnHover: false,
     enableRadial: false,
+    showDepthSlider: true,
+    minDepth: 1,
+    maxDepth: 3,
     initialZoom: 1,
   },
   globalGraph: {
@@ -52,15 +57,14 @@ const defaultOptions: GraphOptions = {
     depth: -1,
     scale: 0.9,
     repelForce: 0.5,
-    centerForce: 0.2,
+    centerForce: 0.3,
     linkDistance: 30,
-    linkStrength: 1,
     fontSize: 0.6,
     opacityScale: 1,
-    showTags: true,
+    showTags: false,
     removeTags: [],
     focusOnHover: true,
-    enableRadial: true,
+    enableRadial: false,
     initialZoom: 1,
   },
 }
@@ -72,6 +76,25 @@ export default ((opts?: Partial<GraphOptions>) => {
     return (
       <div class={classNames(displayClass, "graph")}>
         <h3>{i18n(cfg.locale).components.graph.title}</h3>
+        {localGraph.showDepthSlider && (
+          <div class="graph-depth-control">
+            <label for="graph-depth-slider" class="depth-label">
+              深度
+            </label>
+            <input
+              type="range"
+              id="graph-depth-slider"
+              class="depth-slider"
+              min={localGraph.minDepth || 1}
+              max={localGraph.maxDepth || 3}
+              value={localGraph.depth || 1}
+              step="1"
+            />
+            <span class="depth-value" id="depth-value">
+              {localGraph.depth || 1}
+            </span>
+          </div>
+        )}
         <div class="graph-outer">
           <div class="graph-container" data-cfg={JSON.stringify(localGraph)}></div>
           <button class="global-graph-icon" aria-label="Global Graph">

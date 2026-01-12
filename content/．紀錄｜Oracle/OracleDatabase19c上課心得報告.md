@@ -16,6 +16,8 @@ style: |-
   img{display: block; margin:0 auto;max-width: 100%;max-height: 80%;object-fit: contain;
   }
   table{font-size:24px}
+draft: false
+maturity: Tree
 ---
 
 ![bg left:40% opacity:0.5](．紀錄｜Oracle/Oracle封面.png) 

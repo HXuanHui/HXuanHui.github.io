@@ -68,9 +68,8 @@ type TweenNode = {
   stop: () => void
 }
 
-async function renderGraph(graph: HTMLElement, fullSlug: FullSlug) {
+async function renderGraph(graph: HTMLElement, fullSlug: FullSlug, shouldZoomToFit: boolean = true) {
   const slug = simplifySlug(fullSlug)
-  const visited = getVisited()
   removeAllChildren(graph)
 
   let {
@@ -82,11 +81,8 @@ async function renderGraph(graph: HTMLElement, fullSlug: FullSlug) {
     centerForce,
     linkDistance,
     linkStrength = 1,
-    fontSize,
-    opacityScale,
     removeTags,
     showTags,
-    focusOnHover,
     enableRadial,
     initialZoom = 1,
   } = JSON.parse(graph.dataset["cfg"]!) as D3Config
@@ -169,9 +165,10 @@ async function renderGraph(graph: HTMLElement, fullSlug: FullSlug) {
   // we virtualize the simulation and use pixi to actually render it
   const simulation: Simulation<NodeData, LinkData> = forceSimulation<NodeData>(graphData.nodes)
     .force("charge", forceManyBody().strength(-100 * repelForce))
-    .force("center", forceCenter().strength(centerForce))
+    .force("center", forceCenter(0, 0).strength(centerForce))
     .force("link", forceLink(graphData.links).distance(linkDistance).strength(linkStrength))
-    .force("collide", forceCollide<NodeData>((n) => nodeRadius(n)).iterations(3))
+    .force("collide", forceCollide<NodeData>((n) => nodeRadius(n) * 1.5).iterations(3))
+    .alphaDecay(0.10)
 
   const radius = (Math.min(width, height) / 2) * 0.8
   if (enableRadial) simulation.force("radial", forceRadial(radius).strength(0.2))
@@ -194,13 +191,13 @@ async function renderGraph(graph: HTMLElement, fullSlug: FullSlug) {
     },
     {} as Record<(typeof cssVars)[number], string>,
   )
-
+  
   // calculate color
   const color = (d: NodeData) => {
     const isCurrent = d.id === slug
     if (isCurrent) {
       return computedStyleMap["--secondary"]
-    } else if (visited.has(d.id) || d.id.startsWith("tags/")) {
+    } else if ( d.id.startsWith("tags/")) {
       return computedStyleMap["--tertiary"]
     } else {
       return computedStyleMap["--gray"]
@@ -208,10 +205,10 @@ async function renderGraph(graph: HTMLElement, fullSlug: FullSlug) {
   }
 
   function nodeRadius(d: NodeData) {
-    const numLinks = graphData.links.filter(
+    const numberOfNeighbours = graphData.links.filter(
       (l) => l.source.id === d.id || l.target.id === d.id,
-    ).length
-    return 3 + Math.sqrt(numLinks) * 1.2  // 增大節點大小，讓初始狀態更清晰可見
+    ).length || 2
+    return Math.min(12, Math.max(numberOfNeighbours / 1.5, 3))
   }
 
   let hoveredNodeId: string | null = null
@@ -326,7 +323,7 @@ async function renderGraph(graph: HTMLElement, fullSlug: FullSlug) {
       let alpha = 1
 
       // if we are hovering over a node, we want to highlight the immediate neighbours
-      if (hoveredNodeId !== null && focusOnHover) {
+      if (hoveredNodeId !== null) {
         alpha = n.active ? 1 : 0.2
       }
 
@@ -380,19 +377,20 @@ async function renderGraph(graph: HTMLElement, fullSlug: FullSlug) {
       interactive: false,
       eventMode: "none",
       text: n.text,
-      alpha: 0,
-      anchor: { x: 0.5, y: 1.2 },
+      alpha: 1,
+      anchor: { x: 0.5, y: 0 },
       style: {
-        fontSize: fontSize * 15,
+        fontSize: 8,
         fill: computedStyleMap["--dark"],
-        fontFamily: computedStyleMap["--bodyFont"],
+        fontFamily: "Sans-Serif",
       },
       resolution: window.devicePixelRatio * 4,
     })
+    label.y = nodeRadius(n) + 3
     label.scale.set(1 / scale)
 
     let oldLabelOpacity = 0
-    const isTagNode = nodeId.startsWith("tags/")
+    const isCurrent = nodeId === slug
     const gfx = new Graphics({
       interactive: true,
       label: nodeId,
@@ -401,7 +399,7 @@ async function renderGraph(graph: HTMLElement, fullSlug: FullSlug) {
       cursor: "pointer",
     })
       .circle(0, 0, nodeRadius(n))
-      .fill({ color: isTagNode ? computedStyleMap["--light"] : color(n) })
+      .fill({ color: color(n) })
       .on("pointerover", (e) => {
         updateHoverInfo(e.target.label)
         oldLabelOpacity = label.alpha
@@ -417,8 +415,10 @@ async function renderGraph(graph: HTMLElement, fullSlug: FullSlug) {
         }
       })
 
-    if (isTagNode) {
-      gfx.stroke({ width: 2, color: computedStyleMap["--tertiary"] })
+    // 當前節點：額外圓圈，半徑+1，線寬0.5
+    if (isCurrent) {
+      gfx.circle(0, 0, nodeRadius(n) + 1)
+      gfx.stroke({ width: 0.5, color: color(n) })
     }
 
     nodesContainer.addChild(gfx)
@@ -504,21 +504,15 @@ async function renderGraph(graph: HTMLElement, fullSlug: FullSlug) {
         [0, 0],
         [width, height],
       ])
-      .scaleExtent([0.25, 4])
+      .scaleExtent([0.1, 10])
       .on("zoom", ({ transform }) => {
         currentTransform = transform
         stage.scale.set(transform.k, transform.k)
         stage.position.set(transform.x, transform.y)
 
-        // zoom adjusts opacity of labels too
-        const scale = transform.k * opacityScale
-        let scaleOpacity = Math.max((scale - 1) / 3.75, 0)
-        const activeNodes = nodeRenderData.filter((n) => n.active).flatMap((n) => n.label)
-
+        // 所有標籤保持完全不透明
         for (const label of labelsContainer.children) {
-          if (!activeNodes.includes(label)) {
-            label.alpha = scaleOpacity
-          }
+          label.alpha = 1
         }
       })
     
@@ -526,21 +520,67 @@ async function renderGraph(graph: HTMLElement, fullSlug: FullSlug) {
     if (initialZoom !== 1) {
       currentTransform = zoomIdentity.scale(initialZoom)
       stage.scale.set(initialZoom, initialZoom)
-      
-      // 初始狀態標籤 100% 不透明度（完全可見）
-      for (const label of labelsContainer.children) {
-        label.alpha = 1.0
-      }
-    } else {
-      // 即使沒有初始 zoom，也顯示標籤（100% 可見）
-      for (const label of labelsContainer.children) {
-        label.alpha = 1.0
-      }
+    }
+    
+    // 所有標籤始終保持完全不透明
+    for (const label of labelsContainer.children) {
+      label.alpha = 1
     }
     
     select<HTMLCanvasElement, NodeData>(app.canvas)
       .call(zoomBehavior)
       .call(zoomBehavior.transform, currentTransform)
+    
+    // 實作類似 digitalgarden 的 zoomToFit - 只在首次渲染時執行
+    if (shouldZoomToFit && graphData.nodes.length > 0) {
+      setTimeout(() => {
+        // 計算所有節點的邊界框
+        let minX = Infinity, maxX = -Infinity
+        let minY = Infinity, maxY = -Infinity
+        
+        for (const node of graphData.nodes) {
+          if (node.x !== undefined && node.y !== undefined) {
+            minX = Math.min(minX, node.x)
+            maxX = Math.max(maxX, node.x)
+            minY = Math.min(minY, node.y)
+            maxY = Math.max(maxY, node.y)
+          }
+        }
+        
+        // 如果有有效的邊界
+        if (minX !== Infinity && maxX !== -Infinity) {
+          const padding = 40  // 邊緣留白
+          const graphWidth = maxX - minX
+          const graphHeight = maxY - minY
+          
+          // 計算適當的縮放比例
+          const scaleX = (width - padding * 2) / (graphWidth || 1)
+          const scaleY = (height - padding * 2) / (graphHeight || 1)
+          const scale = Math.min(scaleX, scaleY, 4)  // 最大不超過 4x
+          
+          // 計算圖表的中心點
+          const centerX = (minX + maxX) / 2
+          const centerY = (minY + maxY) / 2
+          
+          // 計算需要的平移量，讓圖表中心對齊畫面中心
+          const translateX = width / 2 - (centerX + width / 2) * scale
+          const translateY = height / 2 - (centerY + height / 2) * scale
+          
+          // 應用變換
+          currentTransform = zoomIdentity
+            .translate(translateX, translateY)
+            .scale(scale)
+          
+          stage.position.set(translateX, translateY)
+          stage.scale.set(scale, scale)
+          
+          select<HTMLCanvasElement, NodeData>(app.canvas)
+            .transition()
+            .duration(200)  // 平滑過渡
+            .call(zoomBehavior.transform, currentTransform)
+        }
+      }, 200)  // 等待 simulation 計算節點位置
+    }
   }
 
   let stopAnimation = false
@@ -558,10 +598,15 @@ async function renderGraph(graph: HTMLElement, fullSlug: FullSlug) {
     for (const l of linkRenderData) {
       const linkData = l.simulationData
       l.gfx.clear()
-      l.gfx.moveTo(linkData.source.x! + width / 2, linkData.source.y! + height / 2)
-      l.gfx
-        .lineTo(linkData.target.x! + width / 2, linkData.target.y! + height / 2)
-        .stroke({ alpha: l.alpha, width: 1, color: l.color })
+      
+      const sourceX = linkData.source.x! + width / 2
+      const sourceY = linkData.source.y! + height / 2
+      const targetX = linkData.target.x! + width / 2
+      const targetY = linkData.target.y! + height / 2
+      
+      // 繪製連線
+      l.gfx.moveTo(sourceX, sourceY)
+      l.gfx.lineTo(targetX, targetY).stroke({ alpha: l.alpha, width: 0.5, color: l.color })
     }
 
     tweens.forEach((t) => t.update(time))
@@ -597,23 +642,49 @@ document.addEventListener("nav", async (e: CustomEventMap["nav"]) => {
   const slug = e.detail.url
   addToVisited(simplifySlug(slug))
 
-  async function renderLocalGraph() {
+  async function renderLocalGraph(shouldZoomToFit: boolean = true) {
     cleanupLocalGraphs()
     const localGraphContainers = document.getElementsByClassName("graph-container")
     for (const container of localGraphContainers) {
-      localGraphCleanups.push(await renderGraph(container as HTMLElement, slug))
+      localGraphCleanups.push(await renderGraph(container as HTMLElement, slug, shouldZoomToFit))
     }
   }
 
   await renderLocalGraph()
   const handleThemeChange = () => {
-    void renderLocalGraph()
+    void renderLocalGraph(false)  // 主題變化時不重新調整視圖
   }
 
   document.addEventListener("themechange", handleThemeChange)
   window.addCleanup(() => {
     document.removeEventListener("themechange", handleThemeChange)
   })
+
+  // 深度滑桿控制
+  const depthSlider = document.getElementById("graph-depth-slider") as HTMLInputElement
+  const depthValue = document.getElementById("depth-value")
+  if (depthSlider && depthValue) {
+    const handleDepthChange = async () => {
+      const newDepth = parseInt(depthSlider.value)
+      depthValue.textContent = depthSlider.value
+      
+      // 更新所有 local graph 容器的配置
+      const localGraphContainers = document.getElementsByClassName("graph-container")
+      for (const container of localGraphContainers) {
+        const cfg = JSON.parse((container as HTMLElement).dataset["cfg"]!)
+        cfg.depth = newDepth
+        ;(container as HTMLElement).dataset["cfg"] = JSON.stringify(cfg)
+      }
+      
+      // 重新渲染（不執行 zoomToFit，保持當前視圖）
+      await renderLocalGraph(false)
+    }
+    
+    depthSlider.addEventListener("input", handleDepthChange)
+    window.addCleanup(() => {
+      depthSlider.removeEventListener("input", handleDepthChange)
+    })
+  }
 
   const containers = [...document.getElementsByClassName("global-graph-outer")] as HTMLElement[]
   async function renderGlobalGraph() {
