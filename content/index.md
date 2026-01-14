@@ -1,20 +1,29 @@
 ---
-title: H.XuanHui's Notes
+title: H.XuanHui's Garden
 ---
 
-> [!abstract] 關於這個空間
-> 這裡是一些工作需要知識。我利用 **Obsidian** 整理，並透過 **Quartz** 將筆記轉化為網頁。可以透過右側的 **互動式圖譜** 查看筆記間的連結脈絡。
+我是一名**系統維運工程師**，並在工作之餘，投入於將**筆記軟體轉化為可實際運作的應用系統**。
+
+我長期深度使用 **Notion**，並透過程式、自動化流程與 API 整合，打造各種應用，例如衣櫃管理與衣服推薦系統，讓原本被動的筆記資料能主動產生決策建議與使用回饋。
+
+同時，我也使用 **Obsidian** 作為知識整理與結構化思考的工具，並透過 **Quartz** 將筆記發佈成網站，作為個人知識與實作成果的展示。
+
+從資料結構設計、推薦邏輯實作，到結果自動回寫與追蹤，我致力於讓筆記不只是記錄，而是能持續運作、可維護、可擴充的個人應用。
 
 ---
 
 ## 🧭 快速導覽
 
-📂**Database:**
- - [PostgreSQL](．紀錄｜PostgreSQL/使用說明/SUMMARY.md)
- - [ORACLE](．紀錄｜Oracle/使用說明/SUMMARY.md)
+📂[[．紀錄｜筆記軟體們/Summary|筆記軟體應用]]-對Obsidian的深入了解，及在Notion的應用開發
 
-💻**Development:**
- - [AutoUpdater](AutoUpdater使用方法.md)
+💻[[．報告｜有趣的東西/Summary|一些的研究]]-閒閒沒事產生的一些疑惑及研究
+
+👩‍💼[工作上的紀錄](https://hxuanhui.github.io/HXuanHui.github.io-CGM-/)
+
+---
+
+#維運工程 #程式開發 #Notion #自動化應用 #Obsidian #知識管理 #網站發佈 
 
 
 ---
+

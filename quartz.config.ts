@@ -4,7 +4,7 @@ import * as Plugin from "./quartz/plugins"
 
 const config: QuartzConfig = {
   configuration: {
-    pageTitle: "H.XuanHui's Notes",
+    pageTitle: "H.XuanHui's Garden",
     pageTitleSuffix: " | 知識庫",
     enableSPA: true,
     enablePopovers: true,
@@ -12,7 +12,7 @@ const config: QuartzConfig = {
       provider: "plausible",
     },
     locale: "zh-TW",
-    baseUrl: "hxuanhui.github.io/HXuanHui.github.io-CGM-",
+    baseUrl: "hxuanhui.github.io",
     ignorePatterns: ["private", "templates", ".obsidian"],
     defaultDateType: "modified",
     theme: {

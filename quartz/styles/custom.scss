@@ -245,3 +245,18 @@
   .explorer .file-outer::before {
     opacity: 0.3; // 讓連接線更淡
   }
+
+// ===== 文章內容字體大小和行距調整 =====
+// 增大本文文字大小
+body {
+  font-size: 1.0625rem; // 從預設 16px 增加到 17px (1.0625 * 16)
+}
+
+// 設定 1.5 倍行高
+article {
+  p,
+  li,
+  tbody {
+    line-height: 1.5; // 改為相對值 1.5 倍行高
+  }
+}

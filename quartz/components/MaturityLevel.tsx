@@ -32,24 +32,24 @@ export default (() => {
         description: "有實質內容，但仍在發展中"
       },
       "3": {
-        icon: "🌳",
-        label: "Tree",
+        icon: "🌻",
+        label: "Flower",
         description: "成熟完整的文章或思考"
       },
       "tree": {
-        icon: "🌳",
-        label: "Tree",
+        icon: "🌻",
+        label: "Flower",
         description: "成熟完整的文章或思考"
       },
       "withered": {
-        icon: "🍂",
+        icon: " 🥀 ",
         label: "Withered",
         description: "過時的觀點，保留作為歷史記錄"
       },
       "stone": {
         icon: "🪨",
         label: "Stone",
-        description: "從其他來源匯入的筆記（如閱讀筆記）"
+        description: "從其他來源匯入的筆記（如閱讀筆記、AI 生成）"
       },
       "signpost": {
         icon: "🪧",
