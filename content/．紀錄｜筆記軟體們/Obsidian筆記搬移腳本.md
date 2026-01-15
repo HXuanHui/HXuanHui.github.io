@@ -100,6 +100,7 @@ Read-Host "✅ 任務完成！按 Enter 鍵離開"
 ## 我做過的其他嘗試
 1. Softlink
 	 可以想見這對Github Page是行不通的，因為Soft Link是指向本地的資料夾，Github根本無法讀取。
+	 
 	 雖然在Local運行得非常順利甚至可以達到熱重載的效果，因為對Quartz來說沒有任何文件修改，所以每次的筆記修改都可以非常及時看到效果（Quartz本身的Config等文件修改還是會重新build），給想要這種效果的人參考。
 
 ## 未來展望

@@ -11,4 +11,4 @@ maturity: signpost
  + [[Digital Garden Forest Porting]]
 ## 關於Notion
 + 靈感大爆發的繪圖訓練！-製作中
-+ 衣服整理+穿衣推薦+購物推薦系統-已完成
++ [[衣服整理+穿衣推薦+購物推薦系統]]-已完成

@@ -103,7 +103,8 @@ maturity: Tree
     回到終端機，執行 Quartz 專案專用的同步指令：
     
     ```
-    npx quartz sync
+    npx quartz sync --no-pull  #第一次上傳要用這個才可以成功
+    npx quartz sync #之後都用這個就好
     ```
     
     這個指令會自動 `git push` 到分支 `v4`。
@@ -158,6 +159,8 @@ maturity: Tree
 | **Obsidian Publish**      | 高      | 極低           | 中         | 官方支持、最穩定    |
 | **Quartz (GitHub Pages)** | 免費     | 中 (需懂一點 Git) | 極高        | 支援圖譜、搜尋，最美觀 |
 | **Digital Garden 插件**     | 免費     | 低            | 中         | 操作最接近原生插件   |
+
+
 看起來Digital Garden是個不錯的選項，最接近原生插建技術難度又低，事實也是如此，我在架設好Quartz之後做了[[Digital-Garden-like local graph|多嘗試讓外觀跟一些小工具貼近原生還有Digital Garden的設置]]。
 
 這邊附上[Digital Garden](https://github.com/oleeskild/obsidian-digital-garden?tab=readme-ov-file)的github。讓大家少走點灣路；D
