@@ -6,6 +6,7 @@ maturity: signpost
 ### Quartz架站
  + [[Obsidian + Quartz + GithubPage架設]]
  + [[Obsidian筆記搬移腳本]]
+ + [[一個搬移筆記的Plugin]]
 #### 自定義
  + [[Digital-Garden-like local graph]]
  + [[Digital Garden Forest Porting]]
